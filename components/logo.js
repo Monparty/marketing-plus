@@ -1,47 +1,72 @@
-// โลโก้ MPLUS — ประกอบจากตัวอักษร Prompt + จุดเหลือง ตามสัดส่วนโลโก้จริง
-//
-// นี่เป็น "ตัวยืน" แทนไฟล์ภาพจริง เพราะ assets/mplus-logo.png และ
-// assets/mplus-logo-white.png ยังไม่มีอยู่ในโปรเจกต์
-//
-// วิธีเปลี่ยนไปใช้ไฟล์ PNG จริง:
-//   1. วางไฟล์ไว้ที่ public/assets/mplus-logo.png และ mplus-logo-white.png
-//   2. แทนที่ body ของคอมโพเนนต์นี้ด้วย:
-//        import Image from "next/image";
-//        <Image src={variant === "white" ? "/assets/mplus-logo-white.png"
-//                                        : "/assets/mplus-logo.png"}
-//               alt="MPLUS — Marketing Plus" width={150} height={34} priority />
-//      (ธีม B ต้องสลับไปใช้ไฟล์ขาว — ดูตัวแปร --logo-* ใน app/globals.css)
-//
-// สีแต่ละตัวอักษรอ่านจากตัวแปร --logo-* ซึ่งเปลี่ยนตามธีม A/B ให้เอง
-// variant="white" บังคับเป็นเวอร์ชันขาวเสมอ (ใช้บนพื้นกรมท่า)
+import Image from "next/image";
+import logoLight from "@/public/assets/mplus-logo.png";
+import logoWhite from "@/public/assets/mplus-logo-white.png";
 
-export function Logo({ variant = "auto", className = "text-[28px]" }) {
+// โลโก้ MPLUS จากไฟล์ภาพ
+//
+// ⚠️ ไฟล์ใน public/assets/ ตอนนี้เป็น PLACEHOLDER (แถบทึบมุมโค้ง 1024×236)
+//    เอาไฟล์โลโก้จริงทับได้เลย ชื่อเดิม ที่เดิม — ไม่ต้องแก้โค้ด
+//    next/image อ่านขนาดจริงจากไฟล์ตอน build จึงปรับอัตราส่วนให้เอง
+//      public/assets/mplus-logo.png        (เวอร์ชันสี)
+//      public/assets/mplus-logo-white.png  (เวอร์ชันขาว)
+//
+// variant="auto"  สลับสี/ขาว ตามธีม A/B ด้วย CSS (ตัวแปร --logo-*-display)
+//                 เรนเดอร์ทั้งสองไฟล์แล้วซ่อนด้วย display จึงไม่ต้องใช้ JS
+// variant="white" บังคับเวอร์ชันขาว ใช้บนพื้นกรมท่า — เรนเดอร์ไฟล์เดียว
+//
+// ชื่อสำหรับ screen reader อยู่บน wrapper ตัวเดียว ส่วน <Image> ปิด alt ไว้
+// ไม่ให้อ่านซ้ำสองรอบเวลาเรนเดอร์ทั้งสองไฟล์
+
+const LABEL = "MPLUS — Marketing Plus";
+
+// ความสูงกำหนดด้วย CSS (h-8.5 / h-8 / h-7.5) ความกว้างจึงออกมาราว 130–150px
+// บอก sizes ไว้ให้ next/image สร้าง srcset แบบ w- เบราว์เซอร์จะเลือกไฟล์เล็ก
+// ถ้าไม่บอก มันจะโหลดไฟล์กว้าง 2048px มาแสดงที่ 150px
+const LOGO_SIZES = "150px";
+
+export function Logo({
+  variant = "auto",
+  className = "h-8.5 w-auto",
+  priority = false,
+}) {
+  if (variant === "white") {
+    return (
+      <span role="img" aria-label={LABEL} className="inline-flex shrink-0">
+        <Image
+          src={logoWhite}
+          alt=""
+          aria-hidden="true"
+          priority={priority}
+          sizes={LOGO_SIZES}
+          className={className}
+        />
+      </span>
+    );
+  }
+
   return (
     <span
-      data-logo={variant}
       role="img"
-      aria-label="MPLUS — Marketing Plus"
-      className={`inline-flex items-end font-head font-bold leading-none tracking-[-0.02em] select-none ${className}`}
+      aria-label={LABEL}
+      className="inline-flex shrink-0 items-center"
     >
-      {/* จุดเหลืองมุมซ้ายล่าง */}
-      <span className="mb-[0.08em] mr-[0.1em] block size-[0.2em] rounded-full bg-brand-accent" />
-
-      <span style={{ color: "var(--logo-m)" }}>M</span>
-      <span style={{ color: "var(--logo-p)" }}>P</span>
-      <span style={{ color: "var(--logo-l)" }}>L</span>
-
-      {/* U เหลืองเสมอ พร้อมสี่เหลี่ยมเล็กด้านบน */}
-      <span className="relative text-brand-accent">
-        <span className="absolute -top-[0.3em] left-[0.1em] block size-[0.16em] bg-brand-accent" />
-        U
-      </span>
-
-      <span style={{ color: "var(--logo-s)" }}>S</span>
-
-      {/* สี่เหลี่ยมเอียงเล็กมุมขวาล่าง */}
-      <span
-        className="mb-[0.06em] ml-[0.06em] block size-[0.13em] rotate-[20deg]"
-        style={{ background: "var(--logo-s)" }}
+      <Image
+        src={logoLight}
+        alt=""
+        aria-hidden="true"
+        priority={priority}
+        sizes={LOGO_SIZES}
+        className={className}
+        style={{ display: "var(--logo-light-display)" }}
+      />
+      <Image
+        src={logoWhite}
+        alt=""
+        aria-hidden="true"
+        priority={priority}
+        sizes={LOGO_SIZES}
+        className={className}
+        style={{ display: "var(--logo-dark-display)" }}
       />
     </span>
   );

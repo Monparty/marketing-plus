@@ -4,7 +4,7 @@ import { why } from "@/lib/content";
 
 export function Why() {
   return (
-    <section id="why" className="bg-white px-5 py-section">
+    <section id="why" className="bg-white px-5 py-section dark:bg-dark-page">
       <div className="mx-auto max-w-[1200px]">
         <SectionHeading label={why.label} title={why.title} />
 
@@ -12,21 +12,21 @@ export function Why() {
           {why.items.map((p) => (
             <Reveal
               key={p.title}
-              className="rounded-card bg-surface px-6 py-7 transition-transform duration-250 ease-out hover:-translate-y-1"
+              className="rounded-card bg-surface px-6 py-7 transition-transform duration-250 ease-out hover:-translate-y-1 dark:bg-dark-card"
             >
-              <div className="mb-[18px] flex size-11.5 items-center justify-center rounded-xl bg-warm">
+              <div className="mb-[18px] flex size-11.5 items-center justify-center rounded-xl bg-warm dark:bg-brand-accent/15">
                 <span
                   aria-hidden="true"
-                  className="font-head text-xl font-semibold text-brand-navy"
+                  className="font-head text-xl font-semibold text-brand-navy dark:text-brand-accent"
                 >
                   {p.mark}
                 </span>
               </div>
 
-              <h3 className="mb-2 font-head text-lg font-semibold text-brand-navy">
+              <h3 className="mb-2 font-head text-lg font-semibold text-brand-navy dark:text-dark-ink">
                 {p.title}
               </h3>
-              <p className="text-[15px] leading-[1.7] text-ink-muted">
+              <p className="text-[15px] leading-[1.7] text-ink-muted dark:text-dark-ink-muted">
                 {p.desc}
               </p>
             </Reveal>

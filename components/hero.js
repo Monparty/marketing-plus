@@ -85,12 +85,12 @@ export function Hero() {
         </div>
 
         {/* ที่วางภาพหลัก — แทนที่ div นี้ด้วย next/image เมื่อได้ภาพจริง */}
-        <div className="overflow-hidden rounded-[20px] border border-brand-navy/10 shadow-hero">
-          <div className="flex aspect-4/3 flex-col items-center justify-center gap-2.5 bg-[repeating-linear-gradient(135deg,#E9EDF5_0_12px,#F4F6FA_12px_24px)] p-6 text-center">
-            <span className="font-mono text-[13px] tracking-[0.04em] text-ink-muted">
+        <div className="overflow-hidden rounded-[20px] border border-brand-navy/10 shadow-hero dark:border-white/12">
+          <div className="flex aspect-4/3 flex-col items-center justify-center gap-2.5 bg-[repeating-linear-gradient(135deg,#E9EDF5_0_12px,#F4F6FA_12px_24px)] p-6 text-center dark:bg-[repeating-linear-gradient(135deg,#2A3557_0_12px,#222C49_12px_24px)]">
+            <span className="font-mono text-[13px] tracking-[0.04em] text-ink-muted dark:text-dark-ink-muted">
               {hero.imagePlaceholder.main}
             </span>
-            <span className="font-mono text-xs text-ink-faint">
+            <span className="font-mono text-xs text-ink-faint dark:text-dark-ink-faint">
               {hero.imagePlaceholder.hint}
             </span>
           </div>

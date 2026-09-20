@@ -22,7 +22,7 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex max-w-[1200px] items-center gap-5 px-5 py-3.5">
         <Link href="/#top" className="flex shrink-0 items-center">
-          <Logo className="text-[26px]" />
+          <Logo className="h-8.5 w-auto" priority />
         </Link>
 
         {/* เมนูเดสก์ท็อป */}
@@ -31,7 +31,7 @@ export function SiteHeader() {
             <a
               key={l.href}
               href={l.href}
-              className="rounded-[10px] px-3.5 py-2.5 text-[15px] transition-colors hover:bg-black/5"
+              className="rounded-[10px] px-3.5 py-2.5 text-[15px] transition-colors hover:bg-black/5 dark:hover:bg-white/10"
               style={{ color: "var(--nav-link)" }}
             >
               {l.label}
@@ -40,7 +40,7 @@ export function SiteHeader() {
 
           <a
             href={site.phoneHref}
-            className="rounded-[10px] px-3.5 py-2.5 text-[15px] font-semibold transition-colors hover:bg-black/5"
+            className="rounded-[10px] px-3.5 py-2.5 text-[15px] font-semibold transition-colors hover:bg-black/5 dark:hover:bg-white/10"
             style={{ color: "var(--nav-link)" }}
           >
             {site.phoneDisplay}

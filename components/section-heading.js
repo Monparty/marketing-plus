@@ -8,13 +8,13 @@ export function SectionHeading({ label, title, body, className = "mb-11" }) {
     <Reveal className={`max-w-[640px] ${className}`}>
       <div className="mb-3.5 flex items-center gap-2.5">
         <span className="block size-2.5 rounded-full bg-brand-accent" />
-        <span className="text-sm font-semibold tracking-[0.06em] text-brand-primary">
+        <span className="text-sm font-semibold tracking-[0.06em] text-brand-primary dark:text-dark-primary">
           {label}
         </span>
       </div>
 
       <h2
-        className={`font-head text-[clamp(28px,4.4vw,40px)] leading-[1.35] font-semibold text-brand-navy ${
+        className={`font-head text-[clamp(28px,4.4vw,40px)] leading-[1.35] font-semibold text-brand-navy dark:text-dark-ink ${
           body ? "mb-3.5" : ""
         }`}
       >
@@ -22,7 +22,9 @@ export function SectionHeading({ label, title, body, className = "mb-11" }) {
       </h2>
 
       {body && (
-        <p className="text-[17px] leading-[1.7] text-ink-muted">{body}</p>
+        <p className="text-[17px] leading-[1.7] text-ink-muted dark:text-dark-ink-muted">
+          {body}
+        </p>
       )}
     </Reveal>
   );

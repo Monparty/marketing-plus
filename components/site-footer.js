@@ -6,11 +6,11 @@ import { footerLinks, site } from "@/lib/content";
 
 export function SiteFooter() {
   return (
-    <footer className="bg-brand-navy px-5 pt-14 pb-8 text-white">
+    <footer className="bg-brand-navy px-5 pt-14 pb-8 text-white dark:bg-dark-footer">
       <div className="mx-auto grid max-w-[1200px] grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-9">
         <div>
           <Link href="/#top" className="mb-[18px] inline-flex">
-            <Logo variant="white" className="text-[26px]" />
+            <Logo variant="white" className="h-8 w-auto" />
           </Link>
           <p className="max-w-[280px] text-[15px] leading-[1.7] text-on-navy">
             รับจัดอีเวนท์ ผลิตสื่อโฆษณา และวางแผนการตลาด สำหรับแบรนด์และโครงการอสังหาริมทรัพย์

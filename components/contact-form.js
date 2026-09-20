@@ -4,9 +4,9 @@ import { useState } from "react";
 import { contact } from "@/lib/content";
 
 const FIELD =
-  "rounded-xl border border-line-strong bg-white px-4 py-3.5 text-base text-ink outline-none focus:border-brand-primary focus:ring-3 focus:ring-brand-primary/15";
+  "rounded-xl border border-line-strong bg-white px-4 py-3.5 text-base text-ink outline-none placeholder:text-ink-faint focus:border-brand-primary focus:ring-3 focus:ring-brand-primary/15 dark:border-dark-line dark:bg-dark-field dark:text-dark-ink dark:placeholder:text-dark-ink-faint dark:focus:border-brand-accent dark:focus:ring-brand-accent/20";
 
-const LABEL = "flex flex-col gap-2 text-[15px] font-medium text-ink";
+const LABEL = "flex flex-col gap-2 text-[15px] font-medium text-ink dark:text-dark-ink";
 
 // ฟอร์มขอใบเสนอราคา
 //
@@ -26,9 +26,9 @@ export function ContactForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="flex flex-col gap-[18px] rounded-[18px] border border-line bg-white px-7 py-8 shadow-form"
+      className="flex flex-col gap-[18px] rounded-[18px] border border-line bg-white px-7 py-8 shadow-form dark:border-dark-line dark:bg-dark-card dark:shadow-dark-card"
     >
-      <h3 className="font-head text-[22px] font-semibold text-brand-navy">
+      <h3 className="font-head text-[22px] font-semibold text-brand-navy dark:text-dark-ink">
         ขอใบเสนอราคา
       </h3>
 
@@ -86,13 +86,13 @@ export function ContactForm() {
       {sent && (
         <p
           role="status"
-          className="rounded-xl bg-warm px-4 py-3.5 text-[15px] leading-[1.6] text-brand-navy"
+          className="rounded-xl bg-warm px-4 py-3.5 text-[15px] leading-[1.6] text-brand-navy dark:bg-brand-accent/15 dark:text-brand-accent"
         >
           ได้รับข้อมูลแล้ว ทีมงานจะติดต่อกลับโดยเร็วที่สุด
         </p>
       )}
 
-      <p className="text-[13px] leading-[1.6] text-ink-faint">
+      <p className="text-[13px] leading-[1.6] text-ink-faint dark:text-dark-ink-faint">
         การส่งฟอร์มถือว่ายอมรับ <a href="/privacy">นโยบายความเป็นส่วนตัว</a>
       </p>
     </form>
