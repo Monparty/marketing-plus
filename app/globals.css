@@ -1,26 +1,182 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ───────────────────────────────────────────────────────────────
+   Design tokens — ตรงกับ MPLUS Design System.dc.html
+   ─────────────────────────────────────────────────────────────── */
+@theme {
+  --color-brand-primary: #2f5da8;
+  --color-brand-navy: #33456f;
+  --color-brand-accent: #f0c85a;
+  --color-brand-accent-hover: #e8bb3f;
+
+  --color-ink: #333333;
+  --color-ink-muted: #5b6577;
+  --color-ink-faint: #8a93a5;
+  --color-ink-disabled: #a2aab9;
+
+  --color-surface: #f4f6fa;
+  --color-surface-alt: #f9fafc;
+  --color-warm: #fff6da;
+  --color-tint-blue: #eef3fb;
+
+  --color-line: #e4e9f2;
+  --color-line-strong: #d6deec;
+  --color-line-dashed: #c9d3e4;
+  --color-line-fade: #dce3ef;
+  --color-disabled: #edeff4;
+
+  /* ตัวอักษรบนพื้นกรมท่า */
+  --color-on-navy: #c6cee0;
+  --color-on-navy-muted: #a9b3ca;
+  --color-on-navy-bright: #e7ebf4;
+
+  --font-head: var(--font-prompt), Prompt, sans-serif;
+  --font-body: var(--font-noto-thai), "Noto Sans Thai", system-ui, sans-serif;
+
+  --radius-card: 16px;
+  --radius-btn: 14px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 1px 3px rgba(51, 69, 111, 0.06);
+  --shadow-card-hover: 0 14px 34px rgba(51, 69, 111, 0.13);
+  --shadow-work-hover: 0 16px 36px rgba(51, 69, 111, 0.14);
+  --shadow-cta: 0 6px 20px rgba(240, 200, 90, 0.32);
+  --shadow-cta-sm: 0 2px 10px rgba(240, 200, 90, 0.35);
+  --shadow-hero: 0 18px 50px rgba(51, 69, 111, 0.18);
+  --shadow-form: 0 2px 12px rgba(51, 69, 111, 0.05);
+  --shadow-toggle: 0 8px 24px rgba(51, 69, 111, 0.3);
+
+  --spacing-section: 80px;
+  --spacing-section-lg: 96px;
+
+  /* เมนูเดสก์ท็อปสลับที่ 900px ตามดีไซน์ต้นฉบับ */
+  --breakpoint-nav: 900px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ───────────────────────────────────────────────────────────────
+   ธีม A (สว่าง) / ธีม B (กรมท่า) — สลับด้วย data-theme บน <html>
+   ค่าที่ขึ้นกับธีมอยู่นอก @theme เพราะต้องเปลี่ยนได้ตอนรันไทม์
+   ─────────────────────────────────────────────────────────────── */
+:root,
+:root[data-theme="A"] {
+  --nav-bg: rgba(255, 255, 255, 0.94);
+  --nav-border: #e4e9f2;
+  --nav-link: #33456f;
+
+  --hero-bg: #f4f6fa;
+  --hero-title: #33456f;
+  --hero-body: #5b6577;
+  --pill-bg: #ffffff;
+  --pill-text: #33456f;
+  --ghost-border: #2f5da8;
+  --ghost-text: #2f5da8;
+
+  --plus-opacity: 0.06;
+  --plus-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72'%3E%3Cpath d='M36 24v24M24 36h24' stroke='%232F5DA8' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+
+  --logo-m: #2f5da8;
+  --logo-p: #333333;
+  --logo-l: #33456f;
+  --logo-s: #33456f;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root[data-theme="B"] {
+  --nav-bg: rgba(51, 69, 111, 0.96);
+  --nav-border: rgba(255, 255, 255, 0.16);
+  --nav-link: #e7ebf4;
+
+  --hero-bg: #33456f;
+  --hero-title: #ffffff;
+  --hero-body: #cdd5e6;
+  --pill-bg: rgba(255, 255, 255, 0.1);
+  --pill-text: #e7ebf4;
+  --ghost-border: #f0c85a;
+  --ghost-text: #f0c85a;
+
+  --plus-opacity: 0.14;
+  --plus-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72'%3E%3Cpath d='M36 24v24M24 36h24' stroke='%23F0C85A' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+
+  --logo-m: #ffffff;
+  --logo-p: #ffffff;
+  --logo-l: #ffffff;
+  --logo-s: #ffffff;
+}
+
+/* โลโก้เวอร์ชันขาว — ใช้บนพื้นกรมท่าเสมอ ไม่ขึ้นกับธีม */
+[data-logo="white"] {
+  --logo-m: #ffffff;
+  --logo-p: #ffffff;
+  --logo-l: #ffffff;
+  --logo-s: #ffffff;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   Base
+   ─────────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--color-brand-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-brand-navy);
+}
+
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   Reveal on scroll — เปิดเผยเมื่อเลื่อนถึง (ดู components/reveal.js)
+   ─────────────────────────────────────────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.3, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+[data-reveal="in"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────────
+   ปุ่มสลับธีม — สถานะ active มาจาก CSS ล้วน จึงไม่มีอาการกระพริบ
+   ตอน hydrate (ดู components/theme-toggle.js)
+   ─────────────────────────────────────────────────────────────── */
+.theme-btn {
+  background: transparent;
+  color: var(--color-on-navy);
+}
+
+:root[data-theme="A"] .theme-btn[data-theme-value="A"],
+:root:not([data-theme]) .theme-btn[data-theme-value="A"],
+:root[data-theme="B"] .theme-btn[data-theme-value="B"] {
+  background: var(--color-brand-accent);
+  color: var(--color-brand-navy);
 }
