@@ -6,7 +6,7 @@ import { contact, site } from "@/lib/content";
 function InfoCard({ label, icon, children }) {
   return (
     <div className="rounded-card border border-line bg-white px-6 py-[22px] dark:border-dark-line dark:bg-dark-card dark:shadow-dark-card">
-      <div className="mb-5 flex size-13 items-center justify-center rounded-[14px] bg-tint-blue dark:bg-zinc-600">
+      <div className="mb-5 flex size-13 items-center justify-center rounded-[14px] bg-tint-blue dark:bg-dark-page-alt">
         <span
           aria-hidden="true"
           className="font-head text-[22px] font-semibold text-brand-primary dark:text-dark-primary"

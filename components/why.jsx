@@ -14,7 +14,7 @@ export function Why() {
               key={p.title}
               className="rounded-card bg-surface px-6 py-7 transition-transform duration-250 ease-out hover:-translate-y-1 dark:bg-dark-card"
             >
-              <div className="mb-[18px] flex size-11.5 items-center justify-center rounded-xl bg-warm dark:bg-brand-accent/15">
+              <div className="mb-[18px] flex size-11.5 items-center justify-center rounded-xl bg-warm dark:bg-dark-page-alt">
                 <span
                   aria-hidden="true"
                   className="font-head text-xl font-semibold text-brand-navy dark:text-brand-accent"

@@ -1,3 +1,4 @@
+import { BackToTop } from "@/components/back-to-top";
 import { Clients } from "@/components/clients";
 import { Contact } from "@/components/contact";
 import { Hero } from "@/components/hero";
@@ -23,6 +24,7 @@ export default function Home() {
         <Contact />
       </main>
       <SiteFooter />
+      <BackToTop />
       <ThemeToggle />
     </div>
   );
