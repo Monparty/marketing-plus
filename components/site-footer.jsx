@@ -26,7 +26,7 @@ export function SiteFooter() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="text-on-navy hover:text-brand-accent"
+                className="text-white hover:text-brand-accent"
               >
                 {l.label}
               </Link>

@@ -5,19 +5,32 @@ import { useSyncExternalStore } from "react";
 const STORAGE_KEY = "mplus-theme";
 const THEME_EVENT = "mplus-theme-change";
 
+// active คือวงแหวนเหลืองรอบวงที่ตรงกับธีมปัจจุบัน — ผูกกับ data-theme บน <html>
+// ผ่าน variant dark:/not-dark: ตรง ๆ (ring-offset 2px + ring 3px = วงรอบนอก 5px)
+// ต้องเขียน class เต็มไว้ตรงนี้ให้ Tailwind สแกนเจอ
 const THEMES = [
-  { value: "A", label: "ธีมสว่าง", swatch: "bg-surface" },
-  { value: "B", label: "ธีมกรมท่า", swatch: "bg-brand-navy" },
+  {
+    value: "A",
+    label: "ธีมสว่าง",
+    swatch:
+      "bg-surface not-dark:ring-3 not-dark:ring-brand-accent not-dark:ring-offset-2 not-dark:ring-offset-white",
+  },
+  {
+    value: "B",
+    label: "ธีมกรมท่า",
+    swatch:
+      "bg-brand-navy dark:ring-3 dark:ring-brand-accent dark:ring-offset-2 dark:ring-offset-dark-card",
+  },
 ];
 
 // ปุ่มสลับธีมลอยมุมขวาล่าง — วงกลมสองสีที่เป็นสีธีมจริง ไม่มีตัวหนังสือ
 //
-// ธีมตัวจริงเก็บไว้ที่ data-theme บน <html> ซึ่งสคริปต์ใน app/layout.js
+// ธีมตัวจริงเก็บไว้ที่ data-theme บน <html> ซึ่งสคริปต์ใน app/layout.jsx
 // ตั้งค่าให้ก่อน paint (กันหน้าจอกระพริบตอนโหลดซ้ำด้วยธีม B)
 // DOM จึงเป็น external store ตัวจริง — อ่านผ่าน useSyncExternalStore
 // ไม่ใช่ useState เพื่อไม่ให้ React ถือสำเนาที่หลุดจากความจริง
 //
-// วงแหวนเหลืองรอบวงที่เลือกอยู่มาจาก CSS ล้วน (.theme-swatch ใน globals.css)
+// วงแหวนเหลืองรอบวงที่เลือกอยู่มาจาก CSS ล้วน (ดู THEMES ด้านบน)
 // จึงไม่มีอาการกระพริบตอน hydrate ค่าที่อ่านที่นี่ใช้กับ aria-pressed เท่านั้น
 
 function applyTheme(value) {
@@ -61,7 +74,7 @@ export function ThemeToggle() {
           title={t.label}
           aria-label={t.label}
           onClick={() => applyTheme(t.value)}
-          className={`theme-swatch size-9 cursor-pointer rounded-full transition-transform hover:scale-105 ${t.swatch}`}
+          className={`size-9 cursor-pointer rounded-full inset-ring inset-ring-brand-navy/18 transition-transform hover:scale-105 dark:inset-ring-white/22 ${t.swatch}`}
         />
       ))}
     </div>

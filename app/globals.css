@@ -113,9 +113,6 @@
   /* ธีมสว่างใช้โลโก้เวอร์ชันสี */
   --logo-light-display: block;
   --logo-dark-display: none;
-
-  --toggle-ring-offset: #ffffff;
-  --toggle-swatch-inset: rgba(51, 69, 111, 0.18);
 }
 
 :root[data-theme="B"] {
@@ -139,9 +136,6 @@
   /* ธีมกรมท่าใช้โลโก้เวอร์ชันขาว */
   --logo-light-display: none;
   --logo-dark-display: block;
-
-  --toggle-ring-offset: #2c3860;
-  --toggle-swatch-inset: rgba(255, 255, 255, 0.22);
 }
 
 /* ───────────────────────────────────────────────────────────────
@@ -165,7 +159,7 @@ body {
 }
 
 a {
-  color: var(--color-brand-primary);
+  color: #ffffff;
   text-decoration: none;
 }
 
@@ -191,7 +185,7 @@ button {
 }
 
 /* ───────────────────────────────────────────────────────────────
-   Reveal on scroll — เปิดเผยเมื่อเลื่อนถึง (ดู components/reveal.js)
+   Reveal on scroll — เปิดเผยเมื่อเลื่อนถึง (ดู components/reveal.jsx)
    ─────────────────────────────────────────────────────────────── */
 [data-reveal] {
   opacity: 0;
@@ -212,22 +206,4 @@ button {
     transform: none;
     transition: none;
   }
-}
-
-/* ───────────────────────────────────────────────────────────────
-   ปุ่มสลับธีม — วงกลมสีธีม สถานะ active เป็นวงแหวนเหลือง
-   ทำด้วย CSS ล้วน จึงไม่มีอาการกระพริบตอน hydrate
-   (ดู components/theme-toggle.js)
-   ─────────────────────────────────────────────────────────────── */
-.theme-swatch {
-  box-shadow: inset 0 0 0 1px var(--toggle-swatch-inset);
-}
-
-:root[data-theme="A"] .theme-swatch[data-theme-value="A"],
-:root:not([data-theme]) .theme-swatch[data-theme-value="A"],
-:root[data-theme="B"] .theme-swatch[data-theme-value="B"] {
-  box-shadow:
-    inset 0 0 0 1px var(--toggle-swatch-inset),
-    0 0 0 2px var(--toggle-ring-offset),
-    0 0 0 5px var(--color-brand-accent);
 }
