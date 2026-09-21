@@ -32,7 +32,7 @@ export function Contact() {
           <InfoCard label="โทรศัพท์">
             <a
               href={site.phoneHref}
-              className="font-head text-xl font-semibold text-brand-primary dark:text-dark-primary"
+              className="text-base font-semibold text-brand-primary! dark:text-dark-primary! dark:hover:text-yellow-300!"
             >
               {site.phoneDisplay}
             </a>
@@ -41,7 +41,7 @@ export function Contact() {
           <InfoCard label="อีเมล">
             <a
               href={`mailto:${site.email}`}
-              className="text-base font-semibold break-all text-brand-primary dark:text-dark-primary"
+              className="text-base font-semibold break-all text-brand-primary! dark:text-dark-primary! dark:hover:text-yellow-300!"
             >
               {site.email}
             </a>
@@ -52,14 +52,14 @@ export function Contact() {
               href={site.facebookHref}
               target="_blank"
               rel="noopener"
-              className="text-base font-semibold text-brand-primary dark:text-dark-primary"
+              className="text-base font-semibold text-brand-primary! dark:text-dark-primary! dark:hover:text-yellow-300!"
             >
               {site.facebookDisplay}
             </a>
           </InfoCard>
 
           <InfoCard label="ที่อยู่">
-            <p className="text-[15px] leading-[1.6] text-ink dark:text-dark-ink-muted">
+            <p className="text-base font-semibold text-brand-primary! dark:text-dark-primary!">
               {site.address}
             </p>
           </InfoCard>
@@ -74,7 +74,7 @@ export function Contact() {
             <div className="flex flex-wrap gap-3">
               <a
                 href={site.phoneHref}
-                className="flex-[1_1_160px] rounded-btn bg-brand-primary px-5 py-4 text-center text-base font-semibold text-white transition-colors hover:bg-brand-navy hover:text-white dark:hover:bg-brand-primary/75"
+                className="flex-[1_1_160px] rounded-btn bg-brand-primary px-5 py-4 text-center text-base font-semibold text-white! transition-colors hover:bg-brand-navy hover:text-white! dark:hover:bg-brand-primary/75"
               >
                 โทรหาเรา
               </a>
@@ -84,7 +84,11 @@ export function Contact() {
                 href={site.facebookHref}
                 target="_blank"
                 rel="noopener"
-                className="flex-[1_1_160px] rounded-btn border-[1.5px] border-brand-primary px-5 py-4 text-center text-base font-semibold text-brand-primary transition-colors hover:bg-brand-primary/10 dark:border-brand-accent dark:text-brand-accent dark:hover:bg-brand-accent/10"
+                className="flex-[1_1_160px] rounded-btn border-[1.5px] px-[30px] py-4 text-[17px] text-center font-semibold transition-colors dark:hover:bg-brand-accent/10 hover:bg-blue-100"
+              style={{
+                borderColor: "var(--ghost-border)",
+                color: "var(--ghost-text)",
+              }}
               >
                 ทักผ่าน Facebook
               </a>

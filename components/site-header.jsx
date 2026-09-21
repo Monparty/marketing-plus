@@ -26,7 +26,7 @@ export function SiteHeader() {
         </Link>
 
         {/* เมนูเดสก์ท็อป */}
-        <nav className="ml-auto hidden items-center gap-1 nav:flex">
+        <nav className="ml-auto hidden items-center gap-2 nav:flex">
           {navLinks.map((l) => (
             <a
               key={l.href}
@@ -48,7 +48,7 @@ export function SiteHeader() {
 
           <a
             href="#contact"
-            className="ml-1.5 rounded-xl bg-brand-accent px-5 py-3 text-[15px] font-semibold text-brand-navy shadow-cta-sm transition hover:-translate-y-px hover:bg-brand-accent-hover hover:text-brand-navy"
+            className="cursor-pointer rounded-btn bg-brand-accent px-4 py-2 text-[15px] font-semibold text-brand-navy! shadow-cta transition hover:-translate-y-0.5 hover:bg-brand-accent-hover"
           >
             ขอใบเสนอราคา
           </a>

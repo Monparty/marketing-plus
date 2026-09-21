@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { contact } from "@/lib/content";
+import Link from "next/link";
 
 const FIELD =
   "rounded-xl border border-line-strong bg-white px-4 py-3.5 text-base text-ink outline-none placeholder:text-ink-faint focus:border-brand-primary focus:ring-3 focus:ring-brand-primary/15 dark:border-dark-line dark:bg-dark-field dark:text-dark-ink dark:placeholder:text-dark-ink-faint dark:focus:border-brand-accent dark:focus:ring-brand-accent/20";
@@ -78,7 +79,7 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className="cursor-pointer rounded-btn bg-brand-accent px-6 py-4 text-[17px] font-semibold text-brand-navy shadow-cta transition-colors hover:bg-brand-accent-hover"
+        className="cursor-pointer rounded-btn bg-brand-accent px-6 py-4 text-[17px] font-semibold text-brand-navy shadow-cta transition hover:-translate-y-0.5 hover:bg-brand-accent-hover"
       >
         ส่งข้อมูลขอใบเสนอราคา
       </button>
@@ -93,7 +94,7 @@ export function ContactForm() {
       )}
 
       <p className="text-[13px] leading-[1.6] text-ink-faint dark:text-dark-ink-faint">
-        การส่งฟอร์มถือว่ายอมรับ <a href="/privacy">นโยบายความเป็นส่วนตัว</a>
+        การส่งฟอร์มถือว่ายอมรับ <Link href="/privacy">นโยบายความเป็นส่วนตัว</Link>
       </p>
     </form>
   );

@@ -69,7 +69,7 @@ export function SiteFooter() {
           </h4>
           <Link
             href="/#contact"
-            className="inline-block rounded-xl bg-brand-accent px-6 py-3.5 text-base font-semibold text-brand-navy hover:bg-brand-accent-hover hover:text-brand-navy"
+            className="inline-block cursor-pointer rounded-btn bg-brand-accent px-4 py-2 text-[15px] font-semibold text-brand-navy! shadow-cta transition hover:-translate-y-0.5 hover:bg-brand-accent-hover"
           >
             ขอใบเสนอราคา
           </Link>

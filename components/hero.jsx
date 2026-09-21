@@ -55,13 +55,13 @@ export function Hero() {
           <div className="flex flex-wrap gap-3.5">
             <a
               href="#contact"
-              className="rounded-btn bg-brand-accent px-[30px] py-4 text-[17px] font-semibold text-brand-navy shadow-cta transition hover:-translate-y-0.5 hover:bg-brand-accent-hover hover:text-brand-navy"
+              className="cursor-pointer rounded-btn bg-brand-accent px-6 py-4 text-[17px] font-semibold text-brand-navy! shadow-cta transition hover:-translate-y-0.5 hover:bg-brand-accent-hover"
             >
               ขอใบเสนอราคา
             </a>
             <a
               href="#work"
-              className="rounded-btn border-[1.5px] px-[30px] py-4 text-[17px] font-semibold transition-colors hover:bg-brand-primary/10"
+              className="rounded-btn border-[1.5px] px-[30px] py-4 text-[17px] font-semibold transition-colors dark:hover:bg-brand-accent/10 hover:bg-blue-100"
               style={{
                 borderColor: "var(--ghost-border)",
                 color: "var(--ghost-text)",
