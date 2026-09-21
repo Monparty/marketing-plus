@@ -18,7 +18,7 @@ const notoSansThai = Noto_Sans_Thai({
 
 export const metadata = {
   title: {
-    default: "Marketing Plus — คิด วางแผน ผลิต จัดอีเวนท์ ครบจบในที่เดียว",
+    default: "Marketing Plus | สร้างสรรค์ วางแผน และจัดอีเวนท์ครบวงจรในที่เดียว",
     template: "%s · Marketing Plus",
   },
   description:
@@ -32,7 +32,7 @@ export const metadata = {
     "Marketing Plus",
   ],
   openGraph: {
-    title: "Marketing Plus — คิด วางแผน ผลิต จัดอีเวนท์ ครบจบในที่เดียว",
+    title: "Marketing Plus | สร้างสรรค์ วางแผน และจัดอีเวนท์ครบวงจรในที่เดียว",
     description:
       "รับจัดอีเวนท์ ผลิตสื่อโฆษณา และวางแผนการตลาด สำหรับแบรนด์และโครงการอสังหาริมทรัพย์",
     locale: "th_TH",

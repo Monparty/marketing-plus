@@ -7,7 +7,7 @@ import { footerLinks, site } from "@/lib/content";
 export function SiteFooter() {
   return (
     <footer className="bg-brand-navy px-5 pt-14 pb-8 text-white dark:bg-dark-footer">
-      <div className="mx-auto grid max-w-[1200px] grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-9">
+      <div className="mx-auto grid max-w-[1200px] grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-2 lg:gap-9">
         <div>
           <Link href="/#top" className="mb-[18px] inline-flex">
             <Logo variant="white" className="h-8 w-auto" />
@@ -21,12 +21,12 @@ export function SiteFooter() {
           <h4 className="mb-4 font-head text-base font-semibold text-white">
             เมนู
           </h4>
-          <div className="flex flex-col gap-2.5 text-[15px]">
+          <div className="flex flex-wrap lg:flex-col gap-2.5 text-[15px]">
             {footerLinks.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
-                className="text-white hover:text-brand-accent"
+                className="text-white hover:text-brand-accent!"
               >
                 {l.label}
               </Link>
@@ -41,13 +41,13 @@ export function SiteFooter() {
           <div className="flex flex-col gap-2.5 text-[15px] leading-[1.6] text-on-navy">
             <a
               href={site.phoneHref}
-              className="text-on-navy hover:text-brand-accent"
+              className="text-on-navy hover:text-brand-accent!"
             >
               {site.phoneDisplay}
             </a>
             <a
               href={`mailto:${site.email}`}
-              className="break-all text-on-navy hover:text-brand-accent"
+              className="break-all text-on-navy hover:text-brand-accent!"
             >
               {site.email}
             </a>
@@ -55,7 +55,7 @@ export function SiteFooter() {
               href={site.facebookHref}
               target="_blank"
               rel="noopener"
-              className="text-on-navy hover:text-brand-accent"
+              className="text-on-navy hover:text-brand-accent!"
             >
               {site.facebookDisplay}
             </a>
@@ -78,7 +78,7 @@ export function SiteFooter() {
 
       <div className="mx-auto mt-9 flex max-w-[1200px] flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-white/15 pt-6 text-sm text-on-navy-muted">
         <span>{site.copyright}</span>
-        <Link href="/privacy" className="text-on-navy hover:text-brand-accent">
+        <Link href="/privacy" className="text-on-navy hover:text-brand-accent!">
           นโยบายความเป็นส่วนตัว (PDPA)
         </Link>
       </div>

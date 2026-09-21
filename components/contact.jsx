@@ -3,9 +3,17 @@ import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { contact, site } from "@/lib/content";
 
-function InfoCard({ label, children }) {
+function InfoCard({ label, icon, children }) {
   return (
     <div className="rounded-card border border-line bg-white px-6 py-[22px] dark:border-dark-line dark:bg-dark-card dark:shadow-dark-card">
+      <div className="mb-5 flex size-13 items-center justify-center rounded-[14px] bg-tint-blue dark:bg-zinc-600">
+        <span
+          aria-hidden="true"
+          className="font-head text-[22px] font-semibold text-brand-primary dark:text-dark-primary"
+        >
+          {icon}
+        </span>
+      </div>
       <div className="mb-2 text-[13px] font-semibold tracking-[0.05em] text-ink-faint dark:text-dark-ink-faint">
         {label}
       </div>
@@ -29,7 +37,7 @@ export function Contact() {
         />
 
         <Reveal className="mb-7 grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4">
-          <InfoCard label="โทรศัพท์">
+          <InfoCard label="โทรศัพท์" icon={site.iconPhone}>
             <a
               href={site.phoneHref}
               className="text-base font-semibold text-brand-primary! dark:text-dark-primary! dark:hover:text-yellow-300!"
@@ -38,7 +46,7 @@ export function Contact() {
             </a>
           </InfoCard>
 
-          <InfoCard label="อีเมล">
+          <InfoCard label="อีเมล" icon={site.iconMail}>
             <a
               href={`mailto:${site.email}`}
               className="text-base font-semibold break-all text-brand-primary! dark:text-dark-primary! dark:hover:text-yellow-300!"
@@ -47,7 +55,7 @@ export function Contact() {
             </a>
           </InfoCard>
 
-          <InfoCard label="Facebook">
+          <InfoCard label="Facebook" icon={site.iconFace}>
             <a
               href={site.facebookHref}
               target="_blank"
@@ -58,7 +66,7 @@ export function Contact() {
             </a>
           </InfoCard>
 
-          <InfoCard label="ที่อยู่">
+          <InfoCard label="ที่อยู่" icon={site.iconAddr}>
             <p className="text-base font-semibold text-brand-primary! dark:text-dark-primary!">
               {site.address}
             </p>
@@ -74,7 +82,7 @@ export function Contact() {
             <div className="flex flex-wrap gap-3">
               <a
                 href={site.phoneHref}
-                className="flex-[1_1_160px] rounded-btn bg-brand-primary px-5 py-4 text-center text-base font-semibold text-white! transition-colors hover:bg-brand-navy hover:text-white! dark:hover:bg-brand-primary/75"
+                className="flex items-center justify-center flex-[1_1_160px] rounded-btn bg-brand-primary px-5 py-4 text-center text-base font-semibold text-white! transition-colors hover:bg-brand-navy hover:text-white! dark:hover:bg-brand-primary/75"
               >
                 โทรหาเรา
               </a>
@@ -84,7 +92,7 @@ export function Contact() {
                 href={site.facebookHref}
                 target="_blank"
                 rel="noopener"
-                className="flex-[1_1_160px] rounded-btn border-[1.5px] px-[30px] py-4 text-[17px] text-center font-semibold transition-colors dark:hover:bg-brand-accent/10 hover:bg-blue-100"
+                className="flex items-center justify-center flex-[1_1_160px] rounded-btn border-[1.5px] px-[30px] py-4 text-[17px] text-center font-semibold transition-colors dark:hover:bg-brand-accent/10 hover:bg-blue-100"
               style={{
                 borderColor: "var(--ghost-border)",
                 color: "var(--ghost-text)",

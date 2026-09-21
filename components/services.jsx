@@ -22,7 +22,7 @@ export function Services() {
               key={s.title}
               className="rounded-card border border-line bg-white px-7 py-8 shadow-card transition-[transform,box-shadow] duration-250 ease-out hover:-translate-y-1.5 hover:shadow-card-hover dark:border-dark-line dark:bg-dark-card dark:shadow-dark-card dark:hover:shadow-dark-card-hover"
             >
-              <div className="mb-5 flex size-13 items-center justify-center rounded-[14px] bg-tint-blue dark:bg-dark-tint">
+              <div className="mb-5 flex size-13 items-center justify-center rounded-[14px] bg-tint-blue dark:bg-zinc-600">
                 <span
                   aria-hidden="true"
                   className="font-head text-[22px] font-semibold text-brand-primary dark:text-dark-primary"

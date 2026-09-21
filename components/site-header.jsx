@@ -112,7 +112,7 @@ export function SiteHeader() {
           <a
             href="#contact"
             onClick={() => setMenuOpen(false)}
-            className="mt-2 rounded-xl bg-brand-accent px-5 py-[15px] text-center text-[17px] font-semibold text-brand-navy hover:text-brand-navy"
+            className="flex items-center justify-center cursor-pointer rounded-btn bg-brand-accent px-6 py-4 text-[17px] font-semibold text-brand-navy! shadow-cta transition hover:-translate-y-0.5 hover:bg-brand-accent-hover"
           >
             ขอใบเสนอราคา
           </a>

@@ -21,7 +21,7 @@ export function Hero() {
         }}
       />
 
-      <div className="relative mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-10 px-5 pt-16 pb-[72px] nav:grid-cols-[1.05fr_0.95fr]">
+      <div className="relative mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-10 px-5 pt-8 lg:pt-16 pb-8 lg:pb-16 nav:grid-cols-[1.05fr_0.95fr]">
         <div className="max-w-[620px]">
           <div
             className="mb-[22px] inline-flex items-center gap-2.5 rounded-pill px-4 py-2"
@@ -41,8 +41,10 @@ export function Hero() {
             style={{ color: "var(--hero-title)" }}
           >
             {hero.titleLines[0]}
-            <br />
-            {hero.titleLines[1]}
+            <span className="text-amber-400">
+              {hero.titleLines[1]}
+            </span>
+            {hero.titleLines[2]}
           </h1>
 
           <p
@@ -55,13 +57,13 @@ export function Hero() {
           <div className="flex flex-wrap gap-3.5">
             <a
               href="#contact"
-              className="cursor-pointer rounded-btn bg-brand-accent px-6 py-4 text-[17px] font-semibold text-brand-navy! shadow-cta transition hover:-translate-y-0.5 hover:bg-brand-accent-hover"
+              className="flex items-center justify-center cursor-pointer rounded-btn bg-brand-accent px-6 py-4 text-[17px] font-semibold text-brand-navy! shadow-cta transition hover:-translate-y-0.5 hover:bg-brand-accent-hover"
             >
               ขอใบเสนอราคา
             </a>
             <a
               href="#work"
-              className="rounded-btn border-[1.5px] px-[30px] py-4 text-[17px] font-semibold transition-colors dark:hover:bg-brand-accent/10 hover:bg-blue-100"
+              className="flex items-center justify-center rounded-btn border-[1.5px] px-[30px] py-4 text-[17px] font-semibold transition-colors dark:hover:bg-brand-accent/10 hover:bg-blue-100"
               style={{
                 borderColor: "var(--ghost-border)",
                 color: "var(--ghost-text)",

@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { Moon, Sun } from "lucide-react";
 
 const STORAGE_KEY = "mplus-theme";
 const THEME_EVENT = "mplus-theme-change";
@@ -9,18 +10,18 @@ const THEME_EVENT = "mplus-theme-change";
 // ผ่าน variant dark:/not-dark: ตรง ๆ (ring-offset 2px + ring 3px = วงรอบนอก 5px)
 // ต้องเขียน class เต็มไว้ตรงนี้ให้ Tailwind สแกนเจอ
 const THEMES = [
-  {
-    value: "A",
-    label: "ธีมสว่าง",
-    swatch:
-      "bg-surface not-dark:ring-3 not-dark:ring-brand-accent not-dark:ring-offset-2 not-dark:ring-offset-white",
-  },
-  {
-    value: "B",
-    label: "ธีมกรมท่า",
-    swatch:
-      "bg-brand-navy dark:ring-3 dark:ring-brand-accent dark:ring-offset-2 dark:ring-offset-dark-card",
-  },
+    {
+        value: "A",
+        label: "ธีมสว่าง",
+        swatch: "bg-surface not-dark:ring-3 not-dark:ring-brand-accent not-dark:ring-offset-2 not-dark:ring-offset-white",
+        icon: <Sun className="text-gray-500" />,
+    },
+    {
+        value: "B",
+        label: "ธีมกรมท่า",
+        swatch: "bg-brand-navy dark:ring-3 dark:ring-brand-accent dark:ring-offset-2 dark:ring-offset-dark-card",
+        icon: <Moon className="text-white" />,
+    },
 ];
 
 // ปุ่มสลับธีมลอยมุมขวาล่าง — วงกลมสองสีที่เป็นสีธีมจริง ไม่มีตัวหนังสือ
@@ -34,49 +35,51 @@ const THEMES = [
 // จึงไม่มีอาการกระพริบตอน hydrate ค่าที่อ่านที่นี่ใช้กับ aria-pressed เท่านั้น
 
 function applyTheme(value) {
-  document.documentElement.dataset.theme = value;
-  try {
-    localStorage.setItem(STORAGE_KEY, value);
-  } catch {
-    // โหมดส่วนตัวหรือปิด storage ไว้ — ธีมยังเปลี่ยนได้ แค่ไม่ถูกจำ
-  }
-  window.dispatchEvent(new Event(THEME_EVENT));
+    document.documentElement.dataset.theme = value;
+    try {
+        localStorage.setItem(STORAGE_KEY, value);
+    } catch {
+        // โหมดส่วนตัวหรือปิด storage ไว้ — ธีมยังเปลี่ยนได้ แค่ไม่ถูกจำ
+    }
+    window.dispatchEvent(new Event(THEME_EVENT));
 }
 
 function subscribe(onChange) {
-  window.addEventListener(THEME_EVENT, onChange);
-  return () => window.removeEventListener(THEME_EVENT, onChange);
+    window.addEventListener(THEME_EVENT, onChange);
+    return () => window.removeEventListener(THEME_EVENT, onChange);
 }
 
 function getSnapshot() {
-  return document.documentElement.dataset.theme === "B" ? "B" : "A";
+    return document.documentElement.dataset.theme === "B" ? "B" : "A";
 }
 
 function getServerSnapshot() {
-  return "A";
+    return "A";
 }
 
 export function ThemeToggle() {
-  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+    const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-  return (
-    <div
-      role="group"
-      aria-label="สลับธีมสีของหน้าเว็บ"
-      className="fixed right-4.5 bottom-4.5 z-60 flex items-center gap-3 rounded-pill border border-line bg-white/95 p-2 shadow-toggle backdrop-blur-sm dark:border-dark-line dark:bg-dark-card/95"
-    >
-      {THEMES.map((t) => (
-        <button
-          key={t.value}
-          type="button"
-          data-theme-value={t.value}
-          aria-pressed={theme === t.value}
-          title={t.label}
-          aria-label={t.label}
-          onClick={() => applyTheme(t.value)}
-          className={`size-9 cursor-pointer rounded-full inset-ring inset-ring-brand-navy/18 transition-transform hover:scale-105 dark:inset-ring-white/22 ${t.swatch}`}
-        />
-      ))}
-    </div>
-  );
+    return (
+        <div
+            role="group"
+            aria-label="สลับธีมสีของหน้าเว็บ"
+            className="fixed right-4.5 bottom-4.5 z-60 flex items-center gap-3 rounded-pill border border-line bg-white/95 p-2 shadow-toggle backdrop-blur-sm dark:border-dark-line dark:bg-dark-card/95"
+        >
+            {THEMES.map((t) => (
+                <button
+                    key={t.value}
+                    type="button"
+                    data-theme-value={t.value}
+                    aria-pressed={theme === t.value}
+                    title={t.label}
+                    aria-label={t.label}
+                    onClick={() => applyTheme(t.value)}
+                    className={`flex justify-center items-center size-9 cursor-pointer rounded-full inset-ring inset-ring-brand-navy/18 transition-transform hover:scale-105 dark:inset-ring-white/22 ${t.swatch}`}
+                >
+                    {t.icon}
+                </button>
+            ))}
+        </div>
+    );
 }
