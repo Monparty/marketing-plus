@@ -13,7 +13,7 @@ export function Work() {
                     {work.items.map((w) => (
                         <Reveal
                             as="article"
-                            key={w.ph}
+                            key={w.src}
                             className="overflow-hidden rounded-card border border-line bg-white transition-all! hover:-translate-y-1.5 hover:shadow-work-hover dark:border-dark-line dark:bg-dark-card dark:hover:shadow-dark-card-hover"
                         >
                             {/* ที่วางภาพผลงาน 16:10 — แทนที่ด้วย next/image เมื่อได้ภาพจริง */}
