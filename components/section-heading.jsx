@@ -6,8 +6,8 @@ import { Reveal } from "@/components/reveal";
 export function SectionHeading({ label, title, body, className = "mb-11" }) {
   return (
     <Reveal className={`max-w-[640px] ${className}`}>
-      <div className="mb-3.5 flex items-center gap-2.5">
-        <span className="block size-2.5 rounded-full bg-brand-accent" />
+      <div className="mb-3.5 flex items-center gap-2">
+        <span className="block h-5 w-1 bg-brand-accent" />
         <span className="text-sm font-semibold tracking-[0.06em] text-brand-primary dark:text-dark-primary">
           {label}
         </span>

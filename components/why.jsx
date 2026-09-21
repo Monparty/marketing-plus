@@ -12,7 +12,7 @@ export function Why() {
                     {why.items.map((p) => (
                         <Reveal
                             key={p.title}
-                            className="rounded-card bg-surface px-6 py-7 transition-transform duration-250 ease-out hover:-translate-y-1 dark:bg-dark-card"
+                            className="rounded-card bg-surface px-6 py-7 transition-all! hover:-translate-y-1 dark:bg-dark-card"
                         >
                             <div className="mb-5 flex size-13 items-center justify-center rounded-[14px] bg-white dark:bg-dark-page-alt">
                                 <span

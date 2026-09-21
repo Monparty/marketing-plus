@@ -1,5 +1,9 @@
-import { Noto_Sans_Thai, Prompt } from "next/font/google";
+import { Noto_Sans_Thai, Prompt, Inter } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+
 
 // Prompt ใช้กับหัวข้อ / Noto Sans Thai ใช้กับเนื้อหา ตาม Design System
 // Prompt ไม่มี variable font จึงต้องระบุน้ำหนักที่ใช้จริง
@@ -50,7 +54,7 @@ export default function RootLayout({ children }) {
     <html
       lang="th"
       data-theme="A"
-      className={`${prompt.variable} ${notoSansThai.variable}`}
+      className={cn(prompt.variable, notoSansThai.variable, "font-sans", inter.variable)}
       suppressHydrationWarning
     >
       <body>
