@@ -1,6 +1,7 @@
 import { BackToTop } from "@/components/back-to-top";
 import { Clients } from "@/components/clients";
 import { Contact } from "@/components/contact";
+import { CookieConsent } from "@/components/cookie-consent";
 import { Hero } from "@/components/hero";
 import { Process } from "@/components/process";
 import { Services } from "@/components/services";
@@ -12,7 +13,7 @@ import { Work } from "@/components/work";
 
 export default function Home() {
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="w-full overflow-x-clip">
       <SiteHeader />
       <main>
         <Hero />
@@ -26,6 +27,7 @@ export default function Home() {
       <SiteFooter />
       <BackToTop />
       <ThemeToggle />
+      <CookieConsent />
     </div>
   );
 }
