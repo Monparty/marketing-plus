@@ -103,8 +103,8 @@ export function ContactForm() {
                 </p>
             )}
 
-            <p className="text-[13px] leading-[1.6] text-ink-faint dark:text-dark-ink-faint">
-                การส่งฟอร์มถือว่ายอมรับ <Link href="/privacy">นโยบายความเป็นส่วนตัว</Link>
+            <p className="text-[13px] text-center leading-[1.6] text-ink-faint! dark:text-dark-ink-faint">
+                การส่งฟอร์มถือว่ายอมรับ <Link href="/privacy"><span className="text-blue-800! dark:text-slate-300!">นโยบายความเป็นส่วนตัว</span></Link>
             </p>
         </form>
     );
