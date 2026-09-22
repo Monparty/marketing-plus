@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Logo } from "@/components/logo";
 import { navLinks, site } from "@/lib/content";
+import { Menu } from "lucide-react";
 
 // แถบบนแบบ sticky — สีทั้งหมดอ่านจากตัวแปรธีม (--nav-*) ใน globals.css
 // เมนูเดสก์ท็อป/มือถือสลับกันที่ 900px ด้วย breakpoint `nav:` ของ Tailwind
@@ -49,7 +50,7 @@ export function SiteHeader() {
         >
             <div className="mx-auto flex max-w-[1200px] items-center gap-5 px-5 py-3.5">
                 <Link href="/#top" className="flex shrink-0 items-center">
-                    <Logo className="h-8.5 w-auto" priority />
+                    <Logo className="h-5 lg:h-8 w-auto" priority />
                 </Link>
 
                 {/* เมนูเดสก์ท็อป */}
@@ -88,12 +89,10 @@ export function SiteHeader() {
                     aria-label="เมนู"
                     aria-expanded={menuOpen}
                     aria-controls="mobile-menu"
-                    className="ml-auto flex size-11 cursor-pointer flex-col items-center justify-center gap-[5px] rounded-xl border bg-transparent nav:hidden"
+                    className="ml-auto flex size-7 cursor-pointer flex-col items-center justify-center rounded-md border bg-transparent nav:hidden"
                     style={{ borderColor: "var(--nav-border)" }}
                 >
-                    <span className="block h-0.5 w-[18px] rounded-sm" style={{ background: "var(--nav-link)" }} />
-                    <span className="block h-0.5 w-[18px] rounded-sm" style={{ background: "var(--nav-link)" }} />
-                    <span className="block h-0.5 w-[18px] rounded-sm" style={{ background: "var(--nav-link)" }} />
+                    <Menu className="size-4.5" />
                 </button>
             </div>
 

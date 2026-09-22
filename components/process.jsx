@@ -22,14 +22,8 @@ export function Process() {
                   {st.n}
                 </span>
                 <span className="h-px flex-1 bg-[linear-gradient(90deg,#DCE3EF,rgba(220,227,239,0))] dark:bg-[linear-gradient(90deg,#46577F,rgba(70,87,127,0))]" />
-                <span
-                  aria-hidden="true"
-                  className="font-head text-xl font-semibold text-brand-accent"
-                >
-                  +
-                </span>
+          
               </div>
-
               <h3 className="mb-2 font-head text-lg font-semibold text-brand-navy dark:text-dark-ink">
                 {st.title}
               </h3>
