@@ -48,9 +48,9 @@ export function SiteHeader() {
                 borderColor: "var(--nav-border)",
             }}
         >
-            <div className="mx-auto flex max-w-[1200px] items-center gap-5 px-5 py-3.5">
+            <div className="mx-auto flex max-w-[1200px] items-center gap-5 px-5 py-2 lg:py-3.5">
                 <Link href="/#top" className="flex shrink-0 items-center">
-                    <Logo className="h-5 lg:h-8 w-auto" priority />
+                    <Logo className="h-4.5 lg:h-8 w-auto" priority />
                 </Link>
 
                 {/* เมนูเดสก์ท็อป */}
