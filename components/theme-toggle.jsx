@@ -13,13 +13,13 @@ const THEMES = [
     {
         value: "A",
         label: "ธีมสว่าง",
-        swatch: "bg-surface not-dark:ring-3 not-dark:ring-brand-accent not-dark:ring-offset-2 not-dark:ring-offset-white",
+        swatch: "bg-surface not-dark:ring-2 not-dark:ring-brand-accent not-dark:ring-offset-2 not-dark:ring-offset-white",
         icon: <Sun className="text-gray-500" />,
     },
     {
         value: "B",
         label: "ธีมกรมท่า",
-        swatch: "bg-brand-navy dark:ring-3 dark:ring-brand-accent dark:ring-offset-2 dark:ring-offset-dark-card",
+        swatch: "bg-brand-navy dark:ring-2 dark:ring-brand-accent dark:ring-offset-2 dark:ring-offset-dark-card",
         icon: <Moon className="text-white" />,
     },
 ];
@@ -64,7 +64,7 @@ export function ThemeToggle() {
         <div
             role="group"
             aria-label="สลับธีมสีของหน้าเว็บ"
-            className="fixed right-4.5 bottom-4.5 z-60 flex items-center gap-3 rounded-pill border border-line bg-white/95 p-2 shadow-toggle backdrop-blur-sm dark:border-dark-line dark:bg-dark-card/95"
+            className="fixed right-4.5 bottom-4.5 z-60 flex items-center gap-3 rounded-pill bg-white/95 p-1.5 shadow-pill backdrop-blur-sm dark:bg-dark-card/95"
         >
             {THEMES.map((t) => (
                 <button

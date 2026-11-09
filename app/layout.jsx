@@ -1,16 +1,24 @@
-import { Noto_Sans_Thai, Prompt, Inter } from "next/font/google";
+import { Noto_Sans_Thai, Noto_Serif_Thai, Prompt, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 
-// Prompt ใช้กับหัวข้อ / Noto Sans Thai ใช้กับเนื้อหา ตาม Design System
+// ตาม DESIGN.md: Prompt = หัวข้อ/ปุ่ม (น้ำหนักบาง 300–400), Noto Sans Thai = เนื้อหา/ป้ายเล็ก,
+// Noto Serif Thai = ย่อหน้าแนะนำ section และคำรับรอง
 // Prompt ไม่มี variable font จึงต้องระบุน้ำหนักที่ใช้จริง
 const prompt = Prompt({
   variable: "--font-prompt",
   subsets: ["thai", "latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500"],
+  display: "swap",
+});
+
+const notoSerifThai = Noto_Serif_Thai({
+  variable: "--font-noto-serif-thai",
+  subsets: ["thai", "latin"],
+  weight: ["400"],
   display: "swap",
 });
 
@@ -54,7 +62,7 @@ export default function RootLayout({ children }) {
     <html
       lang="th"
       data-theme="A"
-      className={cn(prompt.variable, notoSansThai.variable, "font-sans", inter.variable)}
+      className={cn(prompt.variable, notoSansThai.variable, notoSerifThai.variable, "font-sans", inter.variable)}
       suppressHydrationWarning
     >
       <body>

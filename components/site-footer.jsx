@@ -1,86 +1,71 @@
 import Link from "next/link";
+import { ArrowUp } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { footerLinks, site } from "@/lib/content";
+import { btn } from "@/lib/styles";
 
-// ท้ายเว็บ — พื้นกรมท่าเสมอ จึงบังคับโลโก้เป็นเวอร์ชันขาว ไม่ขึ้นกับธีม
+// Night Link Footer ตาม DESIGN.md — พื้น Footer Night เสมอ ไม่ขึ้นกับธีม
+// ลิงก์เมนูตัวใหญ่ Prompt 26px สีขาว รายละเอียดติดต่อและลิงก์กฎหมายเป็นสี On-Navy
 
 export function SiteFooter() {
   return (
-    <footer className="bg-brand-navy px-5 pt-14 pb-8 text-white dark:bg-dark-footer">
-      <div className="mx-auto grid max-w-[1200px] grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-2 lg:gap-9">
-        <div>
-          <Link href="/#top" className="mb-[18px] inline-flex">
+    <footer className="bg-dark-footer px-5 pt-16 pb-8 text-white lg:px-gutter">
+      <div className="mx-auto max-w-[1422px]">
+        <div className="mb-14 flex flex-wrap items-center justify-between gap-6">
+          <Link href="/#top" className="inline-flex">
             <Logo variant="white" className="h-8 w-auto" />
           </Link>
-          <p className="max-w-[280px] text-[15px] leading-[1.7] text-on-navy">
-            รับจัดอีเวนท์ ผลิตสื่อโฆษณา และวางแผนการตลาด สำหรับแบรนด์และโครงการอสังหาริมทรัพย์
-          </p>
+          <div className="flex items-center gap-3">
+            <Link href="/#contact" className={btn.goldPill}>
+              ขอใบเสนอราคา
+            </Link>
+            <Link
+              href="/#top"
+              aria-label="กลับขึ้นด้านบน"
+              className="flex size-12 items-center justify-center rounded-pill text-white shadow-[inset_0_0_0_1px_#a9b3ca] transition-colors hover:bg-white/10"
+            >
+              <ArrowUp className="size-5" strokeWidth={1.5} />
+            </Link>
+          </div>
         </div>
 
-        <div>
-          <h4 className="mb-4 font-head text-base font-semibold text-white">
-            เมนู
-          </h4>
-          <div className="flex flex-wrap lg:flex-col gap-2.5 text-[15px]">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.2fr_1fr_1fr]">
+          <p className="max-w-[340px] font-serif text-[17px] leading-[1.7] text-on-navy">
+            รับจัดอีเวนท์ ผลิตสื่อโฆษณา และวางแผนการตลาด สำหรับแบรนด์และโครงการอสังหาริมทรัพย์
+          </p>
+
+          <nav aria-label="เมนูท้ายเว็บ" className="flex flex-col">
             {footerLinks.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
-                className="text-white hover:text-brand-accent!"
+                className="py-2 font-head text-[26px] leading-[1.2] tracking-[-0.02em] text-white transition-colors hover:text-brand-accent"
               >
                 {l.label}
               </Link>
             ))}
-          </div>
-        </div>
+          </nav>
 
-        <div>
-          <h4 className="mb-4 font-head text-base font-semibold text-white">
-            ติดต่อ
-          </h4>
-          <div className="flex flex-col gap-2.5 text-[15px] leading-[1.6] text-on-navy">
-            <a
-              href={site.phoneHref}
-              className="text-on-navy hover:text-brand-accent!"
-            >
+          <div className="flex flex-col gap-3 text-[15px] leading-[1.6] text-on-navy">
+            <a href={site.phoneHref} className="font-head text-[26px] leading-[1.2] tracking-[-0.02em] text-white hover:text-brand-accent">
               {site.phoneDisplay}
             </a>
-            <a
-              href={`mailto:${site.email}`}
-              className="break-all text-on-navy hover:text-brand-accent!"
-            >
+            <a href={`mailto:${site.email}`} className="break-all hover:text-brand-accent">
               {site.email}
             </a>
-            <a
-              href={site.facebookHref}
-              target="_blank"
-              rel="noopener"
-              className="text-on-navy hover:text-brand-accent!"
-            >
+            <a href={site.facebookHref} target="_blank" rel="noopener" className="hover:text-brand-accent">
               {site.facebookDisplay}
             </a>
             <span>{site.address}</span>
           </div>
         </div>
 
-        <div>
-          <h4 className="mb-4 font-head text-base font-semibold text-white">
-            เริ่มต้นโครงการ
-          </h4>
-          <Link
-            href="/#contact"
-            className="inline-block cursor-pointer rounded-btn bg-brand-accent px-4 py-2 text-[15px] font-semibold text-brand-navy! shadow-cta transition hover:-translate-y-0.5 hover:bg-brand-accent-hover"
-          >
-            ขอใบเสนอราคา
+        <div className="mt-16 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-white/15 pt-6 text-[13px] text-on-navy-muted">
+          <span>{site.copyright}</span>
+          <Link href="/privacy" className="hover:text-brand-accent">
+            นโยบายความเป็นส่วนตัว (PDPA)
           </Link>
         </div>
-      </div>
-
-      <div className="mx-auto mt-9 flex max-w-[1200px] flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-white/15 pt-6 text-sm text-on-navy-muted">
-        <span>{site.copyright}</span>
-        <Link href="/privacy" className="text-on-navy hover:text-brand-accent!">
-          นโยบายความเป็นส่วนตัว (PDPA)
-        </Link>
       </div>
     </footer>
   );

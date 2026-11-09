@@ -34,7 +34,7 @@ export function CookieConsent() {
             aria-labelledby="cookie-title"
             aria-hidden={!open}
             inert={!open}
-            className={`fixed inset-x-3 bottom-3 z-70 rounded-card border border-line bg-white pt-10 px-4 pb-4 shadow-hero transition-all duration-500 sm:right-auto sm:left-4.5 sm:bottom-4.5 sm:w-[400px] dark:border-dark-line dark:bg-dark-card dark:shadow-dark-card-hover ${
+            className={`fixed inset-x-3 bottom-3 z-70 rounded-float border border-line bg-white pt-10 px-5 pb-5 shadow-float transition-all duration-500 sm:right-auto sm:left-4.5 sm:bottom-4.5 sm:w-[400px] dark:border-dark-line dark:bg-dark-card dark:shadow-none ${
                 open ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
             }`}
         >
@@ -56,7 +56,7 @@ export function CookieConsent() {
                             </span>
                             <h2
                                 id="cookie-title"
-                                className="font-head text-md font-semibold text-brand-navy dark:text-dark-ink"
+                                className="font-head text-lg font-normal text-brand-navy dark:text-dark-ink"
                             >
                                 {cookieConsent.title}
                             </h2>
@@ -82,14 +82,14 @@ export function CookieConsent() {
                         <button
                             type="button"
                             onClick={close}
-                            className="flex-1 cursor-pointer rounded-btn bg-brand-accent px-4 py-2 text-xs font-semibold text-brand-navy shadow-cta-sm transition hover:bg-brand-accent-hover"
+                            className="flex-1 cursor-pointer rounded-btn bg-brand-accent h-10 px-4 font-head text-sm font-medium text-brand-navy shadow-tactile transition-colors hover:bg-brand-accent-hover"
                         >
                             {actions.accept}
                         </button>
                         <button
                             type="button"
                             onClick={close}
-                            className="flex-1 cursor-pointer rounded-btn border border-line-strong px-4 py-2 text-xs font-medium text-ink transition-colors hover:bg-surface dark:border-dark-line dark:text-dark-ink dark:hover:bg-dark-card-alt"
+                            className="flex-1 cursor-pointer rounded-btn border border-line-strong h-10 px-4 font-head text-sm font-normal text-ink transition-colors hover:bg-surface dark:border-dark-line dark:text-dark-ink dark:hover:bg-dark-card-alt"
                         >
                             {actions.reject}
                         </button>
@@ -108,7 +108,7 @@ export function CookieConsent() {
                         </button>
                         <h2
                             id="cookie-title"
-                            className="font-head text-md font-semibold text-brand-navy dark:text-dark-ink"
+                            className="font-head text-lg font-normal text-brand-navy dark:text-dark-ink"
                         >
                             {cookieConsent.settingsTitle}
                         </h2>
@@ -139,7 +139,7 @@ export function CookieConsent() {
                                     }`}
                                 >
                                     <span
-                                        className={`absolute top-0.5 left-0.5 size-5 rounded-full bg-white shadow-card transition-transform ${
+                                        className={`absolute top-0.5 left-0.5 size-5 rounded-full bg-white shadow-pill transition-transform ${
                                             prefs[c.id] ? "translate-x-5" : ""
                                         }`}
                                     />
@@ -150,7 +150,7 @@ export function CookieConsent() {
                     <button
                         type="button"
                         onClick={close}
-                        className="w-full cursor-pointer rounded-btn bg-brand-accent px-4 py-2 text-xs font-semibold text-brand-navy shadow-cta-sm transition hover:bg-brand-accent-hover"
+                        className="w-full cursor-pointer rounded-btn bg-brand-accent h-10 px-4 font-head text-sm font-medium text-brand-navy shadow-tactile transition-colors hover:bg-brand-accent-hover"
                     >
                         {actions.save}
                     </button>

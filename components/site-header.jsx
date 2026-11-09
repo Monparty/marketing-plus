@@ -4,63 +4,68 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Logo } from "@/components/logo";
 import { navLinks, site } from "@/lib/content";
-import { Menu } from "lucide-react";
+import { btn } from "@/lib/styles";
+import { Menu, X } from "lucide-react";
 
-// แถบบนแบบ sticky — สีทั้งหมดอ่านจากตัวแปรธีม (--nav-*) ใน globals.css
-// เมนูเดสก์ท็อป/มือถือสลับกันที่ 900px ด้วย breakpoint `nav:` ของ Tailwind
-// (ต้นฉบับใช้ JS ฟัง resize เพราะ design tool เขียน media query ไม่ได้)
+// Transparent Header Bar ตาม DESIGN.md
+// - ลอยทับ hero: โปร่งใส ตัวอักษรขาว
+// - เลื่อนลงพ้นขอบบน: พื้นกระดาษ 95% ตัวอักษรกรมท่า (ธีม B เป็นพื้นกรมท่าเข้ม)
+// - ซ่อนเมื่อเลื่อนลง โผล่กลับเมื่อเลื่อนขึ้น ไม่มีเงาและไม่มีเส้นขอบ
+// เมนูเดสก์ท็อป/มือถือสลับกันที่ 900px ด้วย breakpoint `nav:`
 
 export function SiteHeader() {
     const [menuOpen, setMenuOpen] = useState(false);
-    // hide header on scroll down
     const [show, setShow] = useState(true);
+    const [solid, setSolid] = useState(false);
     const lastScrollY = useRef(0);
     const ticking = useRef(false);
 
     useEffect(() => {
         const handleScroll = () => {
-            if (!ticking.current) {
-                window.requestAnimationFrame(() => {
-                    const currentScrollY = window.scrollY;
-                    const threshold = 50;
-                    if (currentScrollY <= threshold) {
-                        setShow(true);
-                    } else if (currentScrollY > lastScrollY.current) {
-                        setShow(false);
-                    } else {
-                        setShow(true);
-                    }
-                    lastScrollY.current = currentScrollY;
-                    ticking.current = false;
-                });
-                ticking.current = true;
-            }
+            if (ticking.current) return;
+            ticking.current = true;
+            window.requestAnimationFrame(() => {
+                const y = window.scrollY;
+                setSolid(y > 24);
+                if (y <= 50) setShow(true);
+                else setShow(y < lastScrollY.current);
+                lastScrollY.current = y;
+                ticking.current = false;
+            });
         };
-        window.addEventListener("scroll", handleScroll);
+        handleScroll();
+        window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const onPaper = solid || menuOpen;
+
     return (
         <header
-            className={`sticky top-0 z-50 border-b transition-[translate,opacity] duration-300 ease-out [backdrop-filter:saturate(140%)_blur(8px)] ${show || menuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
-            style={{
-                background: "var(--nav-bg)",
-                borderColor: "var(--nav-border)",
-            }}
+            className={`fixed inset-x-0 top-0 z-50 transition-[translate,background-color,color] duration-300 ease-out ${
+                show || menuOpen ? "translate-y-0" : "-translate-y-full"
+            } ${
+                onPaper
+                    ? "bg-white/95 text-brand-navy backdrop-blur-md dark:bg-dark-page/95 dark:text-dark-ink"
+                    : "bg-transparent text-white"
+            }`}
         >
-            <div className="mx-auto flex max-w-[1200px] items-center gap-5 px-5 py-2 lg:py-3.5">
-                <Link href="/#top" className="flex shrink-0 items-center">
-                    <Logo className="h-4.5 lg:h-8 w-auto" priority />
+            <div className="mx-auto flex h-16 max-w-[1422px] items-center gap-6 px-5 lg:h-20 lg:px-gutter">
+                <Link href="/#top" className="flex shrink-0 items-center" aria-label="กลับด้านบน">
+                    {onPaper ? (
+                        <Logo className="h-6 w-auto lg:h-8" priority />
+                    ) : (
+                        <Logo variant="white" className="h-6 w-auto lg:h-8" priority />
+                    )}
                 </Link>
 
                 {/* เมนูเดสก์ท็อป */}
-                <nav className="ml-auto hidden items-center gap-2 nav:flex">
+                <nav className="ml-auto hidden items-center gap-7 nav:flex">
                     {navLinks.map((l) => (
                         <a
                             key={l.href}
                             href={l.href}
-                            className="rounded-[10px] px-3.5 py-2.5 text-[15px] transition-colors hover:bg-black/5 dark:hover:bg-white/10"
-                            style={{ color: "var(--nav-link)" }}
+                            className="font-head text-[15px] leading-none underline-offset-6 hover:underline"
                         >
                             {l.label}
                         </a>
@@ -68,16 +73,12 @@ export function SiteHeader() {
 
                     <a
                         href={site.phoneHref}
-                        className="rounded-[10px] px-3.5 py-2.5 text-[15px] font-semibold transition-colors hover:bg-black/5 dark:hover:bg-white/10"
-                        style={{ color: "var(--nav-link)" }}
+                        className="font-head text-[15px] leading-none underline-offset-6 hover:underline"
                     >
                         {site.phoneDisplay}
                     </a>
 
-                    <a
-                        href="#contact"
-                        className="cursor-pointer rounded-btn bg-brand-accent px-4 py-2 text-[15px] font-semibold text-brand-navy! shadow-cta transition hover:-translate-y-0.5 hover:bg-brand-accent-hover"
-                    >
+                    <a href="#contact" className={`${btn.gold} h-10 px-5 text-[15px]`}>
                         ขอใบเสนอราคา
                     </a>
                 </nav>
@@ -86,51 +87,39 @@ export function SiteHeader() {
                 <button
                     type="button"
                     onClick={() => setMenuOpen((o) => !o)}
-                    aria-label="เมนู"
+                    aria-label={menuOpen ? "ปิดเมนู" : "เมนู"}
                     aria-expanded={menuOpen}
                     aria-controls="mobile-menu"
-                    className="ml-auto flex size-7 cursor-pointer flex-col items-center justify-center rounded-md border bg-transparent nav:hidden"
-                    style={{ borderColor: "var(--nav-border)" }}
+                    className="ml-auto flex size-10 cursor-pointer items-center justify-center nav:hidden"
                 >
-                    <Menu className="size-4.5" />
+                    {menuOpen ? <X className="size-6" strokeWidth={1.5} /> : <Menu className="size-6" strokeWidth={1.5} />}
                 </button>
             </div>
 
-            {/* เมนูมือถือ */}
+            {/* เมนูมือถือ — drawer กระดาษ ลิงก์ 22px */}
             {menuOpen && (
                 <div
                     id="mobile-menu"
-                    className="flex flex-col gap-0.5 border-t px-5 pt-3 pb-5 nav:hidden"
-                    style={{
-                        background: "var(--nav-bg)",
-                        borderColor: "var(--nav-border)",
-                    }}
+                    className="flex h-[calc(100svh-64px)] flex-col bg-white px-5 pt-4 pb-8 dark:bg-dark-page nav:hidden"
                 >
                     {navLinks.map((l) => (
                         <a
                             key={l.href}
                             href={l.href}
                             onClick={() => setMenuOpen(false)}
-                            className="px-1.5 py-3.5 text-[17px]"
-                            style={{ color: "var(--nav-link)" }}
+                            className="py-3 font-head text-[22px] leading-[1.2] tracking-[-0.01em]"
                         >
                             {l.label}
                         </a>
                     ))}
 
-                    <a
-                        href={site.phoneHref}
-                        className="px-1.5 py-3.5 text-[17px] font-semibold"
-                        style={{ color: "var(--nav-link)" }}
-                    >
+                    <div className="my-4 h-px bg-line-strong dark:bg-dark-line" />
+
+                    <a href={site.phoneHref} className="py-2 text-base">
                         โทร {site.phoneDisplay}
                     </a>
 
-                    <a
-                        href="#contact"
-                        onClick={() => setMenuOpen(false)}
-                        className="flex items-center justify-center cursor-pointer rounded-btn bg-brand-accent px-6 py-4 text-[17px] font-semibold text-brand-navy! shadow-cta transition hover:-translate-y-0.5 hover:bg-brand-accent-hover"
-                    >
+                    <a href="#contact" onClick={() => setMenuOpen(false)} className={`${btn.gold} mt-auto w-full`}>
                         ขอใบเสนอราคา
                     </a>
                 </div>

@@ -2,50 +2,41 @@ import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { services } from "@/lib/content";
 
+// Service Plinth Block ตาม DESIGN.md — บล็อกพื้น Mist Plinth มุมเหลี่ยม ไม่มีเงา
+// รายการย่อยเป็นแถวสเปกคั่นด้วยเส้น 1px
+
 export function Services() {
   return (
-    <section
-      id="services"
-      className="bg-white px-5 py-section dark:bg-dark-page"
-    >
-      <div className="mx-auto max-w-[1200px]">
-        <SectionHeading
-          label={services.label}
-          title={services.title}
-          body={services.body}
-        />
+    <section id="services" className="bg-white px-5 py-section lg:px-gutter dark:bg-dark-page">
+      <div className="mx-auto max-w-[1422px]">
+        <SectionHeading label={services.label} title={services.title} body={services.body} />
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
           {services.items.map((s) => (
             <Reveal
               as="article"
               key={s.title}
-              className="rounded-card border border-line bg-white px-7 py-8 shadow-card transition-all! hover:-translate-y-1.5 hover:shadow-card-hover dark:border-dark-line dark:bg-dark-card dark:shadow-dark-card dark:hover:shadow-dark-card-hover"
+              className="flex flex-col bg-surface p-8 transition-colors! hover:bg-tint-blue lg:p-10 dark:bg-dark-card dark:hover:bg-dark-tint"
             >
-              <div className="mb-5 flex size-13 items-center justify-center rounded-[14px] bg-tint-blue dark:bg-dark-page-alt">
-                <span
-                  aria-hidden="true"
-                  className="font-head text-[22px] font-semibold text-brand-primary dark:text-dark-primary"
-                >
-                  {s.mark}
-                </span>
-              </div>
+              <span
+                aria-hidden="true"
+                className="mb-10 text-brand-navy dark:text-dark-primary [&_svg]:size-7 [&_svg]:stroke-[1.5]"
+              >
+                {s.mark}
+              </span>
 
-              <h3 className="mb-2.5 font-head text-[22px] font-semibold text-brand-navy dark:text-dark-ink">
+              <h3 className="mb-2 font-head text-[30px] leading-[1.3] font-light tracking-[-0.02em] text-brand-navy dark:text-dark-ink">
                 {s.title}
               </h3>
-              <p className="mb-5 text-base leading-[1.7] text-ink-muted dark:text-dark-ink-muted">
-                {s.desc}
-              </p>
+              <p className="mb-8 text-base leading-[1.7] text-ink-muted dark:text-dark-ink-muted">{s.desc}</p>
 
-              <ul className="flex flex-col gap-2.5">
+              <ul className="mt-auto border-t border-line dark:border-dark-line">
                 {s.items.map((item) => (
                   <li
                     key={item}
-                    className="flex items-start gap-2.5 text-[15px] leading-[1.6] text-ink dark:text-dark-ink-muted"
+                    className="border-b border-line py-3 text-[15px] leading-[1.6] text-ink dark:border-dark-line dark:text-dark-ink-muted"
                   >
-                    <span className="mt-2 block size-1.5 shrink-0 rounded-full bg-brand-accent" />
-                    <span>{item}</span>
+                    {item}
                   </li>
                 ))}
               </ul>

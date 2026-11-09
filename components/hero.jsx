@@ -1,104 +1,82 @@
 "use client";
+
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { hero } from "@/lib/content";
+import { btn } from "@/lib/styles";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import React, { Fragment } from "react";
 
-// ส่วนหัวหน้าแรก — สีทั้งหมดอ่านจากตัวแปรธีม จึงเป็น server component ได้
-// ลายเครื่องหมายบวกเป็น SVG ฝังใน --plus-pattern (globals.css)
+// Full-Bleed Scene Block ตาม DESIGN.md
+// ภาพอีเวนท์เต็มจอเลื่อนวนอยู่ด้านหลัง ทับด้วย scrim สี Night Stage
+// แล้ววางกองข้อความสีขาวไว้กลางจอ — header โปร่งใสลอยทับด้านบน
 
 export function Hero() {
-    const plugin = React.useRef(Autoplay({ delay: 4000, stopOnMouseEnter: true, stopOnInteraction: false }));
+    // สร้าง plugin ครั้งเดียวด้วย lazy state — อ่านค่าตอน render ได้ (ref อ่านไม่ได้)
+    const [autoplay] = React.useState(() => Autoplay({ delay: 5000, stopOnInteraction: false }));
+
     return (
-        <section id="top" className="relative overflow-hidden" style={{ background: "var(--hero-bg)" }}>
+        <section
+            id="top"
+            className="relative isolate flex h-[clamp(600px,92svh,1000px)] items-center justify-center overflow-hidden bg-dark-page text-white"
+        >
+            <Carousel plugins={[autoplay]} opts={{ loop: true }} className="absolute inset-0 -z-10">
+                <CarouselContent className="ml-0 h-[clamp(600px,92svh,1000px)]">
+                    {hero.imagePlaceholder?.map((item, index) => (
+                        <CarouselItem key={index} className="relative h-full pl-0">
+                            <Image
+                                src={item.src}
+                                alt={item.alt}
+                                fill
+                                sizes="100vw"
+                                priority={index === 0}
+                                className="object-cover"
+                            />
+                        </CarouselItem>
+                    ))}
+                </CarouselContent>
+
+                {/* ปุ่มเลื่อนภาพ — มุมซ้ายล่างแบบปุ่มหยุดฟิล์มในต้นแบบ */}
+                <div className="absolute bottom-6 left-5 z-10 flex gap-2 lg:left-gutter">
+                    <CarouselPrevious className="static size-10 translate-y-0 rounded-pill border-white/40 bg-transparent! text-white hover:bg-white/15! [&_svg]:text-white" />
+                    <CarouselNext className="static size-10 translate-y-0 rounded-pill border-white/40 bg-transparent! text-white hover:bg-white/15! [&_svg]:text-white" />
+                </div>
+            </Carousel>
+
+            {/* scrim — มืดขึ้นด้านล่างให้ตัวอักษรอ่านได้ทุกภาพ */}
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0"
-                style={{
-                    opacity: "var(--plus-opacity)",
-                    backgroundImage: "var(--plus-pattern)",
-                    backgroundSize: "72px 72px",
-                }}
+                className="pointer-events-none absolute inset-0 -z-[5] bg-[linear-gradient(180deg,rgba(30,39,64,0.6)_0%,rgba(30,39,64,0.5)_45%,rgba(30,39,64,0.8)_100%)]"
             />
 
-            <div className="relative mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-10 px-5 pt-8 lg:pt-16 pb-8 lg:pb-16 nav:grid-cols-[1.05fr_0.95fr]">
-                <div className="max-w-[620px]">
-                    <div
-                        className="mb-[22px] inline-flex items-center gap-2.5 rounded-pill px-4 py-2"
-                        style={{ background: "var(--pill-bg)" }}
-                    >
-                        <span className="block size-[9px] rounded-full bg-brand-accent" />
-                        <span className="text-sm font-medium" style={{ color: "var(--pill-text)" }}>
-                            {hero.pill}
-                        </span>
-                    </div>
+            <div className="mx-auto flex max-w-[980px] flex-col items-center px-5 pt-16 text-center">
+                <p className="mb-6 text-sm font-medium tracking-[0.04em] text-on-navy">{hero.pill}</p>
 
-                    <h1
-                        className="mb-5 font-head text-[clamp(34px,6.4vw,58px)] leading-[1.25] font-semibold tracking-[-0.01em] [text-wrap:pretty]"
-                        style={{ color: "var(--hero-title)" }}
-                    >
-                        {hero.titleLines[0]}
-                        <span className="text-amber-400">{hero.titleLines[1]}</span>
-                        {hero.titleLines[2]}
-                    </h1>
+                <h1 className="mb-6 font-head text-[clamp(40px,6vw,77px)] leading-[1.2] font-normal tracking-[-0.02em] [text-wrap:balance]">
+                    {hero.titleLines[0]}
+                    <span className="text-brand-accent">{hero.titleLines[1]}</span>
+                    {hero.titleLines[2]}
+                </h1>
 
-                    <p className="mb-8 max-w-[520px] text-[18px] leading-[1.7]" style={{ color: "var(--hero-body)" }}>
-                        {hero.body}
-                    </p>
+                <p className="mb-10 max-w-[620px] text-[17px] leading-[1.7] text-on-navy-bright">{hero.body}</p>
 
-                    <div className="flex flex-wrap gap-3.5">
-                        <a
-                            href="#contact"
-                            className="flex items-center justify-center cursor-pointer rounded-btn bg-brand-accent px-6 py-4 text-[17px] font-semibold text-brand-navy! shadow-cta transition hover:-translate-y-0.5 hover:bg-brand-accent-hover"
-                        >
-                            ขอใบเสนอราคา
-                        </a>
-                        <a
-                            href="#work"
-                            className="flex items-center justify-center rounded-btn border-[1.5px] px-[30px] py-4 text-[17px] font-semibold transition-colors dark:hover:bg-brand-accent/10 hover:bg-blue-100"
-                            style={{
-                                borderColor: "var(--ghost-border)",
-                                color: "var(--ghost-text)",
-                            }}
-                        >
-                            ดูผลงาน
-                        </a>
-                    </div>
-
-                    <div
-                        className="mt-[34px] flex flex-wrap items-center gap-x-6.5 gap-y-2.5 text-[15px]"
-                        style={{ color: "var(--hero-body)" }}
-                    >
-                        {hero.tags.map((tag, i) => (
-                            <Fragment key={tag}>
-                                {i > 0 && <span className="opacity-40">•</span>}
-                                <span>{tag}</span>
-                            </Fragment>
-                        ))}
-                    </div>
+                <div className="flex flex-wrap justify-center gap-3">
+                    <a href="#contact" className={btn.goldPill}>
+                        ขอใบเสนอราคา
+                    </a>
+                    <a href="#work" className={btn.film}>
+                        ดูผลงาน
+                    </a>
                 </div>
 
-                {/* ที่วางภาพหลัก — แทนที่ div นี้ด้วย next/image เมื่อได้ภาพจริง */}
-                <Carousel
-                    plugins={[plugin.current]}
-                    onMouseEnter={plugin.current.stop}
-                    onMouseLeave={() => plugin.current.play()}
-                >
-                    <CarouselContent>
-                        {hero.imagePlaceholder?.map((item, index) => (
-                            <CarouselItem key={index}>
-                                <Image
-                                    src={item.src}
-                                    alt={item.alt}
-                                    className="w-full h-full object-cover rounded-md"
-                                />
-                            </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    <CarouselPrevious />
-                    <CarouselNext />
-                </Carousel>
+                <div className="mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[13px] font-medium tracking-[0.04em] text-on-navy">
+                    {hero.tags.map((tag, i) => (
+                        <Fragment key={tag}>
+                            {i > 0 && <span className="text-brand-accent">+</span>}
+                            <span>{tag}</span>
+                        </Fragment>
+                    ))}
+                </div>
             </div>
         </section>
     );

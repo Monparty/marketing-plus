@@ -63,29 +63,27 @@
 
   --font-head: var(--font-prompt), Prompt, sans-serif;
   --font-body: var(--font-noto-thai), "Noto Sans Thai", system-ui, sans-serif;
+  /* ย่อหน้าแนะนำ section และคำรับรอง — แทน Tiempos Text ใน DESIGN.md */
+  --font-serif: var(--font-noto-serif-thai), "Noto Serif Thai", Georgia, serif;
 
-  --radius-card: 16px;
-  --radius-btn: 14px;
+  /* รัศมีตาม DESIGN.md — ภาพและการ์ดเหลี่ยม ปุ่ม 6px การ์ดลอย 19px */
+  --radius-card: 0px;
+  --radius-tile: 10px;
+  --radius-float: 19px;
+  --radius-btn: 6px;
+  --radius-tag: 4px;
   --radius-pill: 999px;
 
-  --shadow-card: 0 1px 3px rgba(51, 69, 111, 0.06);
-  --shadow-card-hover: 0 14px 34px rgba(51, 69, 111, 0.13);
-  --shadow-work-hover: 0 16px 36px rgba(51, 69, 111, 0.14);
-  --shadow-cta: 0 6px 20px rgba(240, 200, 90, 0.32);
-  --shadow-cta-sm: 0 2px 10px rgba(240, 200, 90, 0.35);
-  --shadow-hero: 0 18px 50px rgba(51, 69, 111, 0.18);
-  --shadow-form: 0 2px 12px rgba(51, 69, 111, 0.05);
-  --shadow-toggle: 0 8px 24px rgba(51, 69, 111, 0.3);
+  /* การ์ดในแคตตาล็อกแบนราบ เงาเก็บไว้ให้ pill และการ์ดลอยเท่านั้น */
+  --shadow-pill: 3px 3px 10px 0px rgba(0, 0, 0, 0.1);
+  --shadow-float: 8px 3px 8px 0px rgba(0, 0, 0, 0.1);
+  --shadow-tactile:
+    inset 0 -1px 3px 0 rgba(0, 0, 0, 0.18), inset 0 1px 3px 0 rgba(255, 255, 255, 0.18);
+  --shadow-ring: inset 0 0 0 1px #d6deec;
+  --shadow-ring-dark: inset 0 0 0 1px #46577f;
 
-  /* บนพื้นมืด เงาฟุ้ง ๆ มองไม่เห็น ความลึกจึงมาจากเงาเข้มบวกเส้นไฮไลต์
-     บางขอบบน ซึ่งอ่านเหมือนการ์ดจริงที่มีขอบรับแสง */
-  --shadow-dark-card:
-    0 1px 2px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  --shadow-dark-card-hover:
-    0 16px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.09);
-
-  --spacing-section: 80px;
-  --spacing-section-lg: 96px;
+  --spacing-section: clamp(80px, 10vw, 132px);
+  --spacing-gutter: 44px;
 
   /* เมนูเดสก์ท็อปสลับที่ 900px ตามดีไซน์ต้นฉบับ */
   --breakpoint-nav: 900px;
@@ -105,21 +103,6 @@
    ─────────────────────────────────────────────────────────────── */
 :root,
 :root[data-theme="A"] {
-  --nav-bg: rgba(255, 255, 255, 0.94);
-  --nav-border: #e4e9f2;
-  --nav-link: #33456f;
-
-  --hero-bg: #f4f6fa;
-  --hero-title: #33456f;
-  --hero-body: #5b6577;
-  --pill-bg: #ffffff;
-  --pill-text: #33456f;
-  --ghost-border: #2f5da8;
-  --ghost-text: #2f5da8;
-
-  --plus-opacity: 0.06;
-  --plus-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72'%3E%3Cpath d='M36 24v24M24 36h24' stroke='%232F5DA8' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
-
   /* ธีมสว่างใช้โลโก้เวอร์ชันสี */
   --logo-light-display: block;
   --logo-dark-display: none;
@@ -127,21 +110,6 @@
 
 :root[data-theme="B"] {
   color-scheme: dark;
-
-  --nav-bg: rgba(51, 69, 111, 0.96);
-  --nav-border: rgba(255, 255, 255, 0.16);
-  --nav-link: #e7ebf4;
-
-  --hero-bg: #33456f;
-  --hero-title: #ffffff;
-  --hero-body: #cdd5e6;
-  --pill-bg: rgba(255, 255, 255, 0.1);
-  --pill-text: #e7ebf4;
-  --ghost-border: #f0c85a;
-  --ghost-text: #f0c85a;
-
-  --plus-opacity: 0.14;
-  --plus-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72'%3E%3Cpath d='M36 24v24M24 36h24' stroke='%23F0C85A' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
 
   /* ธีมกรมท่าใช้โลโก้เวอร์ชันขาว */
   --logo-light-display: none;
@@ -153,7 +121,7 @@
    ─────────────────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 88px;
+  scroll-padding-top: 80px;
 }
 
 body {
@@ -168,23 +136,10 @@ body {
   color: var(--color-dark-ink);
 }
 
+/* ลิงก์รับสีจากตัวแม่ — แต่ละ component กำหนดสีเอง (navy บนกระดาษ ขาวบนฉาก) */
 a {
-  color: #ffffff;
+  color: inherit;
   text-decoration: none;
-}
-
-a:hover {
-  color: var(--color-brand-navy);
-}
-
-/* ลิงก์ในเนื้อหาบนพื้นมืด — น้ำเงินเข้มอ่านไม่ออก เลยสว่างขึ้นและ
-   hover เป็นสีเน้นของแบรนด์ */
-:root[data-theme="B"] a {
-  color: var(--color-dark-primary);
-}
-
-:root[data-theme="B"] a:hover {
-  color: var(--color-brand-accent);
 }
 
 input,

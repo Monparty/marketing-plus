@@ -2,112 +2,85 @@ import { ContactForm } from "@/components/contact-form";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { contact, site } from "@/lib/content";
+import { btn } from "@/lib/styles";
 
-function InfoCard({ label, icon, children }) {
+// ช่องทางติดต่อเป็นแถวสเปกคั่นเส้น 1px (แบบ spec rows ใน DESIGN.md)
+// ฟอร์มเป็น Floating Card ด้านซ้าย ปุ่ม + แผนที่ด้านขวา
+
+function InfoRow({ label, icon, children }) {
   return (
-    <div className="rounded-card border border-line bg-white px-6 py-[22px] dark:border-dark-line dark:bg-dark-card dark:shadow-dark-card">
-      <div className="mb-5 flex size-13 items-center justify-center rounded-[14px] bg-tint-blue dark:bg-dark-page-alt">
-        <span
-          aria-hidden="true"
-          className="font-head text-[22px] font-semibold text-brand-primary dark:text-dark-primary"
-        >
-          {icon}
-        </span>
+    <div className="flex items-start gap-4 border-b border-line-strong py-5 dark:border-dark-line">
+      <span
+        aria-hidden="true"
+        className="mt-0.5 text-brand-navy dark:text-dark-primary [&_svg]:size-5 [&_svg]:stroke-[1.5]"
+      >
+        {icon}
+      </span>
+      <div className="min-w-0 flex-1">
+        <div className="mb-1 text-[13px] font-medium tracking-[0.04em] text-ink-muted dark:text-dark-ink-muted">
+          {label}
+        </div>
+        <div className="font-head text-[17px] leading-[1.5] text-brand-navy dark:text-dark-ink">{children}</div>
       </div>
-      <div className="mb-2 text-[13px] font-semibold tracking-[0.05em] text-ink-faint dark:text-dark-ink-faint">
-        {label}
-      </div>
-      {children}
     </div>
   );
 }
 
+const LINK = "underline-offset-4 hover:underline";
+
 export function Contact() {
   return (
-    <section
-      id="contact"
-      className="bg-surface px-5 py-section dark:bg-dark-page-alt"
-    >
+    <section id="contact" className="bg-surface px-5 py-section lg:px-gutter dark:bg-dark-page">
       <div className="mx-auto max-w-[1200px]">
-        <SectionHeading
-          label={contact.label}
-          title={contact.title}
-          body={contact.body}
-          className="mb-10"
-        />
+        <SectionHeading label={contact.label} title={contact.title} body={contact.body} />
 
-        <Reveal className="mb-7 grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4">
-          <InfoCard label="โทรศัพท์" icon={site.iconPhone}>
-            <a
-              href={site.phoneHref}
-              className="text-base font-semibold text-brand-primary! dark:text-dark-primary! dark:hover:text-yellow-300!"
-            >
-              {site.phoneDisplay}
-            </a>
-          </InfoCard>
-
-          <InfoCard label="อีเมล" icon={site.iconMail}>
-            <a
-              href={`mailto:${site.email}`}
-              className="text-base font-semibold break-all text-brand-primary! dark:text-dark-primary! dark:hover:text-yellow-300!"
-            >
-              {site.email}
-            </a>
-          </InfoCard>
-
-          <InfoCard label="Facebook" icon={site.iconFace}>
-            <a
-              href={site.facebookHref}
-              target="_blank"
-              rel="noopener"
-              className="text-base font-semibold text-brand-primary! dark:text-dark-primary! dark:hover:text-yellow-300!"
-            >
-              {site.facebookDisplay}
-            </a>
-          </InfoCard>
-
-          <InfoCard label="ที่อยู่" icon={site.iconAddr}>
-            <p className="text-base font-semibold text-brand-primary! dark:text-dark-primary!">
-              {site.address}
-            </p>
-          </InfoCard>
-        </Reveal>
-
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] items-start gap-6">
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
           <Reveal>
             <ContactForm />
           </Reveal>
 
-          <Reveal className="flex flex-col gap-4">
-            <div className="flex flex-wrap gap-3">
-              <a
-                href={site.phoneHref}
-                className="flex items-center justify-center flex-[1_1_160px] rounded-btn bg-brand-primary px-5 py-4 text-center text-base font-semibold text-white! transition-colors hover:bg-brand-navy hover:text-white! dark:hover:bg-brand-primary/75"
-              >
+          <Reveal className="flex flex-col gap-8">
+            <div className="border-t border-line-strong dark:border-dark-line">
+              <InfoRow label="โทรศัพท์" icon={site.iconPhone}>
+                <a href={site.phoneHref} className={LINK}>
+                  {site.phoneDisplay}
+                </a>
+              </InfoRow>
+              <InfoRow label="อีเมล" icon={site.iconMail}>
+                <a href={`mailto:${site.email}`} className={`break-all ${LINK}`}>
+                  {site.email}
+                </a>
+              </InfoRow>
+              <InfoRow label="Facebook" icon={site.iconFace}>
+                <a href={site.facebookHref} target="_blank" rel="noopener" className={LINK}>
+                  {site.facebookDisplay}
+                </a>
+              </InfoRow>
+              <InfoRow label="ที่อยู่" icon={site.iconAddr}>
+                <p>{site.address}</p>
+              </InfoRow>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <a href={site.phoneHref} className={`${btn.navy} flex-[1_1_160px]`}>
                 โทรหาเรา
               </a>
-              {/* บนพื้นมืด ปุ่มโครงน้ำเงินจมไปกับพื้น จึงใช้สีเน้นเหมือน
-                  ปุ่ม ghost ของ hero ให้ภาษาปุ่มสอดคล้องกันทั้งหน้า */}
               <a
                 href={site.facebookHref}
                 target="_blank"
                 rel="noopener"
-                className="flex items-center justify-center flex-[1_1_160px] rounded-btn border-[1.5px] px-[30px] py-4 text-[17px] text-center font-semibold transition-colors dark:hover:bg-brand-accent/10 hover:bg-blue-100"
-              style={{
-                borderColor: "var(--ghost-border)",
-                color: "var(--ghost-text)",
-              }}
+                className={`${btn.outline} flex-[1_1_160px]`}
               >
                 ทักผ่าน Facebook
               </a>
             </div>
 
-            <div className="overflow-hidden rounded-[18px] border border-line bg-white dark:border-dark-line dark:bg-dark-card">
+            <div className="overflow-hidden bg-white dark:bg-dark-card">
               <iframe
                 title="แผนที่ Marketing Plus"
                 src={site.mapSrc}
                 width="100%"
-                height={320}
+                height={300}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 className="block border-0"

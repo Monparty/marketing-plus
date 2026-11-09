@@ -28,13 +28,13 @@ export function BackToTop() {
             aria-hidden={!visible}
             tabIndex={visible ? 0 : -1}
             onClick={() => window.scrollTo({ top: 0 })}
-            className={`fixed right-4.5 bottom-21 z-60 flex size-12 cursor-pointer items-center justify-center rounded-full bg-brand-accent text-brand-navy shadow-cta transition-all duration-300 hover:scale-105 ${
+            className={`fixed right-4.5 bottom-21 z-60 flex size-12 cursor-pointer items-center justify-center rounded-pill bg-white text-brand-navy shadow-pill transition-all duration-300 hover:bg-surface dark:bg-dark-card dark:text-dark-ink dark:hover:bg-dark-tint ${
                 visible
                     ? "translate-y-0 opacity-100"
                     : "pointer-events-none translate-y-3 opacity-0"
             }`}
         >
-            <ArrowUp className="size-5" strokeWidth={2.5} />
+            <ArrowUp className="size-5" strokeWidth={1.5} />
         </button>
     );
 }

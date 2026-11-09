@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { contact } from "@/lib/content";
 import Link from "next/link";
+import { btn } from "@/lib/styles";
 import {
     Select,
     SelectContent,
@@ -14,9 +15,9 @@ import {
 } from "@/components/ui/select";
 
 const FIELD =
-    "rounded-xl border border-line-strong bg-white px-4 py-3.5 text-base text-ink outline-none placeholder:text-ink-faint focus:border-brand-primary focus:ring-3 focus:ring-brand-primary/15 dark:border-dark-line dark:bg-dark-field dark:text-dark-ink dark:placeholder:text-dark-ink-faint dark:focus:border-brand-accent dark:focus:ring-brand-accent/20";
+    "min-h-12 rounded-btn border border-line-strong bg-white px-4 py-3 text-base text-ink outline-none placeholder:text-ink-faint focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 dark:border-dark-line dark:bg-dark-field dark:text-dark-ink dark:placeholder:text-dark-ink-faint dark:focus:border-brand-accent dark:focus:ring-brand-accent/20";
 
-const LABEL = "flex flex-col gap-2 text-[15px] font-medium text-ink dark:text-dark-ink";
+const LABEL = "flex flex-col gap-2 text-[13px] font-medium tracking-[0.04em] text-ink-muted dark:text-dark-ink-muted";
 
 // ฟอร์มขอใบเสนอราคา
 //
@@ -36,9 +37,9 @@ export function ContactForm() {
     return (
         <form
             onSubmit={onSubmit}
-            className="flex flex-col gap-[18px] rounded-[18px] border border-line bg-white px-7 py-8 shadow-form dark:border-dark-line dark:bg-dark-card dark:shadow-dark-card"
+            className="flex flex-col gap-5 rounded-float border border-line bg-white px-6 py-8 shadow-float sm:px-8 dark:border-dark-line dark:bg-dark-card dark:shadow-none"
         >
-            <h3 className="font-head text-[22px] font-semibold text-brand-navy dark:text-dark-ink">ขอใบเสนอราคา</h3>
+            <h3 className="font-head text-[30px] leading-[1.3] font-light tracking-[-0.02em] text-brand-navy dark:text-dark-ink">ขอใบเสนอราคา</h3>
 
             <label className={LABEL}>
                 ชื่อผู้ติดต่อ
@@ -89,7 +90,7 @@ export function ContactForm() {
 
             <button
                 type="submit"
-                className="cursor-pointer rounded-btn bg-brand-accent px-6 py-4 text-[17px] font-semibold text-brand-navy shadow-cta transition hover:-translate-y-0.5 hover:bg-brand-accent-hover"
+                className={`${btn.gold} mt-2 w-full`}
             >
                 ส่งข้อมูลขอใบเสนอราคา
             </button>
@@ -97,14 +98,14 @@ export function ContactForm() {
             {sent && (
                 <p
                     role="status"
-                    className="rounded-xl bg-warm px-4 py-3.5 text-[15px] leading-[1.6] text-brand-navy dark:bg-brand-accent/15 dark:text-brand-accent"
+                    className="rounded-btn bg-warm px-4 py-3.5 text-[15px] leading-[1.6] text-brand-navy dark:bg-brand-accent/15 dark:text-brand-accent"
                 >
                     ได้รับข้อมูลแล้ว ทีมงานจะติดต่อกลับโดยเร็วที่สุด
                 </p>
             )}
 
-            <p className="text-[13px] text-center leading-[1.6] text-ink-faint! dark:text-dark-ink-faint">
-                การส่งฟอร์มถือว่ายอมรับ <Link href="/privacy"><span className="text-blue-800! dark:text-slate-300!">นโยบายความเป็นส่วนตัว</span></Link>
+            <p className="text-[13px] text-center leading-[1.6] text-ink-faint dark:text-dark-ink-faint">
+                การส่งฟอร์มถือว่ายอมรับ <Link href="/privacy"><span className="text-brand-primary underline underline-offset-2 dark:text-dark-primary">นโยบายความเป็นส่วนตัว</span></Link>
             </p>
         </form>
     );

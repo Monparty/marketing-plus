@@ -1,28 +1,40 @@
 import { Reveal } from "@/components/reveal";
+import { eyebrow } from "@/lib/styles";
 
-// หัวข้อประจำ section: จุดเหลือง + ป้ายกำกับ + H2 + คำอธิบาย (ถ้ามี)
+// Section Heading ตาม DESIGN.md — กองกลางหน้า:
+// ป้ายเล็กสี Slate (มี + สีทอง) → หัวข้อ Prompt 48px/400 สีกรมท่า → ย่อหน้า serif กว้างไม่เกิน 704px
 // ใช้ซ้ำทุก section ของหน้าแรก ให้ระยะและขนาดตรงกันทั้งหน้า
 
-export function SectionHeading({ label, title, body, className = "mb-11" }) {
+export function SectionHeading({ label, title, body, className = "mb-14", tone = "paper" }) {
+  const onDark = tone === "dark";
+
   return (
-    <Reveal className={`max-w-[640px] ${className}`}>
-      <div className="mb-3.5 flex items-center gap-2">
-        <span className="block h-5 w-1 bg-brand-accent" />
-        <span className="text-sm font-semibold tracking-[0.06em] text-brand-primary dark:text-dark-primary">
-          {label}
+    <Reveal className={`mx-auto max-w-[704px] text-center ${className}`}>
+      <p
+        className={`mb-4 inline-flex items-center gap-2 ${eyebrow} ${
+          onDark ? "text-on-navy" : "text-ink-muted dark:text-dark-ink-muted"
+        }`}
+      >
+        <span aria-hidden="true" className="font-head text-base leading-none text-brand-accent">
+          +
         </span>
-      </div>
+        {label}
+      </p>
 
       <h2
-        className={`font-head text-[clamp(28px,4.4vw,40px)] leading-[1.35] font-semibold text-brand-navy dark:text-dark-ink ${
-          body ? "mb-3.5" : ""
-        }`}
+        className={`font-head text-[clamp(32px,4.4vw,48px)] leading-[1.2] font-normal tracking-[-0.02em] [text-wrap:balance] ${
+          onDark ? "text-white" : "text-brand-navy dark:text-dark-ink"
+        } ${body ? "mb-5" : ""}`}
       >
         {title}
       </h2>
 
       {body && (
-        <p className="text-[17px] leading-[1.7] text-ink-muted dark:text-dark-ink-muted">
+        <p
+          className={`font-serif text-[17px] leading-[1.7] ${
+            onDark ? "text-on-navy" : "text-ink-muted dark:text-dark-ink-muted"
+          }`}
+        >
           {body}
         </p>
       )}
