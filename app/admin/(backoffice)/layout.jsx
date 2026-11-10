@@ -33,7 +33,7 @@ const menuList = [
     {
         ico: <PiggyBank size={22} />,
         title: "ระบบบัญชีและ การเงิน",
-        path: "financial ",
+        path: "financial",
     },
 ];
 function Layout({ children }) {
@@ -73,7 +73,7 @@ function Layout({ children }) {
                         <NavMenu key={index} ico={item.ico} title={item.title} path={item.path} />
                     ))}
                 </div>
-                <div className="w-full h-full border-2 rounded-br-lg bg-white p-4">{children}</div>
+                <div className="w-full h-full border-2 rounded-br-lg bg-white p-4 overflow-auto min-w-0">{children}</div>
             </div>
         </div>
     );

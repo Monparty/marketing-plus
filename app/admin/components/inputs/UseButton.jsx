@@ -1,9 +1,9 @@
 import { Button } from "antd";
 import React from "react";
 
-function UseButton({ label, type, onClick }) {
+function UseButton({ label, type, onClick, icon, danger, htmlType, size = "large" }) {
     return (
-        <Button size="large" type={type} onClick={onClick}>
+        <Button size={size} type={type} onClick={onClick} icon={icon} danger={danger} htmlType={htmlType}>
             {label}
         </Button>
     );
