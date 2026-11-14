@@ -91,7 +91,7 @@ function Page() {
                         </p>
 
                         <p className="mb-7 mt-1 font-serif text-base leading-[1.7] text-black border p-2 rounded-lg bg-amber-200 text-center">
-                            ตอนนี้เป็นระบบทดสอบ<br />ใส่ระหัสอะไรก็ได้ครับ แล้วกดเข้าสู่ระบบ
+                            ตอนนี้เป็นระบบทดสอบ<br />ใส่รหัสอะไรก็ได้ครับ แล้วกดเข้าสู่ระบบ
                         </p>
 
                         <UseConfigProvider theme={loginTheme}>
