@@ -1,6 +1,5 @@
 "use client";
 import UseModal from "@/app/admin/components/display/UseModal";
-import UsePopconfirm from "@/app/admin/components/display/UsePopconfirm";
 import UseTable from "@/app/admin/components/display/UseTable";
 import UseButton from "@/app/admin/components/inputs/UseButton";
 import UseDatePicker from "@/app/admin/components/inputs/UseDatePicker";
@@ -11,6 +10,7 @@ import UseSelect from "@/app/admin/components/inputs/UseSelect";
 import UseTextArea from "@/app/admin/components/inputs/UseTextArea";
 import { formatDate, formatMoney } from "@/app/admin/mock-data";
 import { useState } from "react";
+import RowActions from "@/app/admin/components/RowActions";
 
 function MaintenanceTab({ logs, setLogs, equipmentOptions }) {
     const [editing, setEditing] = useState(null);
@@ -39,12 +39,7 @@ function MaintenanceTab({ logs, setLogs, equipmentOptions }) {
         {
             title: "จัดการ",
             render: (_, r) => (
-                <div className="flex">
-                    <UseButton label="แก้ไข" type="link" size="small" onClick={() => setEditing(r)} />
-                    <UsePopconfirm title="ยืนยันการลบ?" onConfirm={() => remove(r.id)}>
-                        <UseButton label="ลบ" type="link" size="small" danger />
-                    </UsePopconfirm>
-                </div>
+                <RowActions onEdit={() => setEditing(r)} onDelete={() => remove(r.id)} />
             ),
         },
     ];

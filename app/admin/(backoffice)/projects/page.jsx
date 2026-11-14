@@ -1,6 +1,8 @@
 "use client";
+import { ListChecks } from "lucide-react";
+import RowActions from "@/app/admin/components/RowActions";
 import UseModal from "@/app/admin/components/display/UseModal";
-import UsePopconfirm from "@/app/admin/components/display/UsePopconfirm";
+import UseTooltip from "@/app/admin/components/display/UseTooltip";
 import UseProgress from "@/app/admin/components/display/UseProgress";
 import UseSteps from "@/app/admin/components/display/UseSteps";
 import UseTable from "@/app/admin/components/display/UseTable";
@@ -129,13 +131,18 @@ function Page() {
             title: "จัดการ",
             key: "actions",
             render: (_, r) => (
-                <div className="flex">
-                    <UseButton label="เช็กลิสต์" type="link" size="small" onClick={() => setChecklistId(r.id)} />
-                    <UseButton label="แก้ไข" type="link" size="small" onClick={() => setEditing(r)} />
-                    <UsePopconfirm title="ยืนยันการลบ?" onConfirm={() => remove(r.id)}>
-                        <UseButton label="ลบ" type="link" size="small" danger />
-                    </UsePopconfirm>
-                </div>
+                <RowActions onEdit={() => setEditing(r)} onDelete={() => remove(r.id)}>
+                    <UseTooltip title="เช็กลิสต์">
+                        <UseButton
+                            type="text"
+                            size="small"
+                            ariaLabel="เช็กลิสต์"
+                            className="bg-purple-600!"
+                            icon={<ListChecks size={14} color="#ffffff" />}
+                            onClick={() => setChecklistId(r.id)}
+                        />
+                    </UseTooltip>
+                </RowActions>
             ),
         },
     ];

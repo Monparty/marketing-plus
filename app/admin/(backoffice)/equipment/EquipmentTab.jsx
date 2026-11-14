@@ -1,6 +1,5 @@
 "use client";
 import UseModal from "@/app/admin/components/display/UseModal";
-import UsePopconfirm from "@/app/admin/components/display/UsePopconfirm";
 import UseTable from "@/app/admin/components/display/UseTable";
 import UseTag from "@/app/admin/components/display/UseTag";
 import UseButton from "@/app/admin/components/inputs/UseButton";
@@ -11,6 +10,7 @@ import UseInputNumber from "@/app/admin/components/inputs/UseInputNumber";
 import UseSelect from "@/app/admin/components/inputs/UseSelect";
 import { equipmentCategoryOptions, equipmentStatusOptions } from "@/app/admin/mock-data";
 import { useState } from "react";
+import RowActions from "@/app/admin/components/RowActions";
 
 const categoryFilterOptions = [{ value: "all", label: "ทุกหมวดหมู่" }, ...equipmentCategoryOptions];
 
@@ -61,12 +61,7 @@ function EquipmentTab({ items, setItems }) {
         {
             title: "จัดการ",
             render: (_, r) => (
-                <div className="flex">
-                    <UseButton label="แก้ไข" type="link" size="small" onClick={() => setEditing(r)} />
-                    <UsePopconfirm title="ยืนยันการลบ?" onConfirm={() => remove(r.id)}>
-                        <UseButton label="ลบ" type="link" size="small" danger />
-                    </UsePopconfirm>
-                </div>
+                <RowActions onEdit={() => setEditing(r)} onDelete={() => remove(r.id)} />
             ),
         },
     ];

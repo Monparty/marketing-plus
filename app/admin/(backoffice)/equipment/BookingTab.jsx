@@ -1,7 +1,6 @@
 "use client";
 import UseAlert from "@/app/admin/components/display/UseAlert";
 import UseModal from "@/app/admin/components/display/UseModal";
-import UsePopconfirm from "@/app/admin/components/display/UsePopconfirm";
 import UseTable from "@/app/admin/components/display/UseTable";
 import UseButton from "@/app/admin/components/inputs/UseButton";
 import UseDatePicker from "@/app/admin/components/inputs/UseDatePicker";
@@ -11,6 +10,7 @@ import UseInputNumber from "@/app/admin/components/inputs/UseInputNumber";
 import UseSelect from "@/app/admin/components/inputs/UseSelect";
 import { formatDate, projectName, projects } from "@/app/admin/mock-data";
 import { useState } from "react";
+import RowActions from "@/app/admin/components/RowActions";
 
 const projectOptions = projects.map((p) => ({ value: p.id, label: p.name }));
 
@@ -73,12 +73,7 @@ function BookingTab({ bookings, setBookings, equipment, equipmentOptions }) {
         {
             title: "จัดการ",
             render: (_, r) => (
-                <div className="flex">
-                    <UseButton label="แก้ไข" type="link" size="small" onClick={() => open(r)} />
-                    <UsePopconfirm title="ยืนยันการลบ?" onConfirm={() => remove(r.id)}>
-                        <UseButton label="ลบ" type="link" size="small" danger />
-                    </UsePopconfirm>
-                </div>
+                <RowActions onEdit={() => open(r)} onDelete={() => remove(r.id)} />
             ),
         },
     ];

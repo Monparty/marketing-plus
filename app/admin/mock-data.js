@@ -52,7 +52,6 @@ export const staffList = [
         rateUnit: "day",
         bankName: "กสิกรไทย",
         bankAccount: "123-4-56789-0",
-        rating: 5,
         note: "PM หลัก ดูแลงานเปิดตัวโครงการ",
     },
     {
@@ -68,7 +67,6 @@ export const staffList = [
         rateUnit: "day",
         bankName: "ไทยพาณิชย์",
         bankAccount: "234-5-67890-1",
-        rating: 4,
         note: "",
     },
     {
@@ -84,7 +82,6 @@ export const staffList = [
         rateUnit: "day",
         bankName: "กรุงเทพ",
         bankAccount: "345-6-78901-2",
-        rating: 5,
         note: "พูดเก่ง ตรงต่อเวลา",
     },
     {
@@ -100,7 +97,6 @@ export const staffList = [
         rateUnit: "day",
         bankName: "กรุงไทย",
         bankAccount: "456-7-89012-3",
-        rating: 4,
         note: "ขยัน",
     },
     {
@@ -116,7 +112,6 @@ export const staffList = [
         rateUnit: "hour",
         bankName: "กสิกรไทย",
         bankAccount: "567-8-90123-4",
-        rating: 4,
         note: "มีกล้องและเลนส์เอง",
     },
     {
@@ -132,7 +127,6 @@ export const staffList = [
         rateUnit: "day",
         bankName: "กรุงศรีอยุธยา",
         bankAccount: "678-9-01234-5",
-        rating: 3,
         note: "มาสายบ้าง",
     },
     {
@@ -148,7 +142,6 @@ export const staffList = [
         rateUnit: "day",
         bankName: "ทหารไทยธนชาต",
         bankAccount: "789-0-12345-6",
-        rating: 5,
         note: "",
     },
 ];
@@ -366,3 +359,18 @@ export const expenses = [
 
 // เป้ารายได้ (บาท)
 export const revenueTarget = { month: 1500000, year: 15000000 };
+
+// ---------- ปฏิทินโปรเจกต์ ----------
+// ตั้งต้นจากข้อมูลหน้าอื่น: ช่วงวันที่จาก projects, ผู้ดูแล = PM (personnel),
+// staff = คนที่จองไว้ในหน้า staff, อุปกรณ์ = ที่จองไว้ในหน้า equipment
+export const calendarProjects = projects.map((p) => ({
+    id: p.id,
+    name: p.name,
+    startDate: p.prepDate,
+    endDate: p.teardownDate,
+    managerIds: [p.pmId],
+    staffIds: [...new Set(staffBookings.filter((b) => b.projectId === p.id && b.status !== "cancelled").map((b) => b.staffId))],
+    equipment: equipmentBookings
+        .filter((b) => b.projectId === p.id)
+        .map((b) => ({ equipmentId: b.equipmentId, quantity: b.quantity })),
+}));

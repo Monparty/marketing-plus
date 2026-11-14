@@ -6,14 +6,13 @@ import UseInput from "@/app/admin/components/inputs/UseInput";
 import UseInputNumber from "@/app/admin/components/inputs/UseInputNumber";
 import UseSelect from "@/app/admin/components/inputs/UseSelect";
 import UseTextArea from "@/app/admin/components/inputs/UseTextArea";
-import UseRate from "@/app/admin/components/inputs/UseRate";
 import UseForm from "@/app/admin/components/inputs/UseForm";
 import UseFormItem from "@/app/admin/components/inputs/UseFormItem";
 import UseModal from "@/app/admin/components/display/UseModal";
 import UseTable from "@/app/admin/components/display/UseTable";
 import UseTag from "@/app/admin/components/display/UseTag";
-import UsePopconfirm from "@/app/admin/components/display/UsePopconfirm";
 import { staffList, staffTypeOptions, roleOptions, rateUnitOptions, bankOptions } from "@/app/admin/mock-data";
+import RowActions from "@/app/admin/components/RowActions";
 
 const typeColors = { fulltime: "blue", freelance: "purple" };
 
@@ -94,25 +93,15 @@ function Page() {
             ),
         },
         {
-            title: "เรตติ้ง",
-            key: "rating",
-            render: (_, s) => (
-                <div>
-                    <UseRate value={s.rating} disabled />
-                    {s.note && <div className="text-gray-500 text-sm">{s.note}</div>}
-                </div>
-            ),
+            title: "บันทึก",
+            dataIndex: "note",
+            render: (v) => (v ? <div className="text-gray-500 text-sm">{v}</div> : "-"),
         },
         {
             title: "จัดการ",
             key: "actions",
             render: (_, s) => (
-                <div className="flex gap-1">
-                    <UseButton label="แก้ไข" type="link" size="small" onClick={() => setEditing(s)} />
-                    <UsePopconfirm title="ยืนยันการลบ?" onConfirm={() => remove(s.id)}>
-                        <UseButton label="ลบ" type="link" size="small" danger />
-                    </UsePopconfirm>
-                </div>
+                <RowActions onEdit={() => setEditing(s)} onDelete={() => remove(s.id)} />
             ),
         },
     ];
@@ -187,12 +176,7 @@ function Page() {
                             <UseInput placeholder="xxx-x-xxxxx-x" />
                         </UseFormItem>
 
-                        <h3 className="col-span-2 font-medium mb-2">ประเมินประสิทธิภาพ</h3>
-                        <div className="col-span-2">
-                            <UseFormItem name="rating" label="เรตติ้ง">
-                                <UseRate />
-                            </UseFormItem>
-                        </div>
+                        <h3 className="col-span-2 font-medium mb-2">บันทึกการทำงาน</h3>
                         <div className="col-span-2">
                             <UseFormItem name="note" label="บันทึกพฤติกรรม/ประเมิน">
                                 <UseTextArea placeholder="เช่น ตรงต่อเวลา, ขยัน" />

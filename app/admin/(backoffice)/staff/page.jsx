@@ -10,7 +10,7 @@ import UseFormItem from "@/app/admin/components/inputs/UseFormItem";
 import UseModal from "@/app/admin/components/display/UseModal";
 import UseTable from "@/app/admin/components/display/UseTable";
 import UseTag from "@/app/admin/components/display/UseTag";
-import UsePopconfirm from "@/app/admin/components/display/UsePopconfirm";
+import RowActions from "@/app/admin/components/RowActions";
 import {
     staffBookings,
     staffList,
@@ -96,12 +96,7 @@ function Page() {
             title: "จัดการ",
             key: "actions",
             render: (_, r) => (
-                <div className="flex gap-2">
-                    <UseButton label="แก้ไข" type="link" size="small" onClick={() => setEditing(r)} />
-                    <UsePopconfirm title="ยืนยันการลบ?" onConfirm={() => remove(r.id)}>
-                        <UseButton label="ลบ" type="link" size="small" danger />
-                    </UsePopconfirm>
-                </div>
+                <RowActions onEdit={() => setEditing(r)} onDelete={() => remove(r.id)} />
             ),
         },
     ];
